@@ -1,0 +1,35 @@
+.gradle/
+build/
+run/
+*.class
+recovery/normalized-source/
+recovery/constant-requests.tsv
+recovery/constant-results.txt
+
+# Isolated local-only dedicated-server test data
+recovery/development-server/
+
+# Local environments, logs, caches and built mod archives
+logs/
+dist/
+*.log
+*.log.gz
+__pycache__/
+*.py[cod]
+.idea/
+.vscode/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+
+# Recovery scratch data and local test evidence; the mapping is needed to build.
+recovery/*
+!recovery/intermediary-dev-mappings.jar
+!recovery/smart-aul-validation.md
+!recovery/RESTORATION_README_RU.md

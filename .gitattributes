@@ -1,0 +1,10 @@
+* text=auto eol=lf
+*.java text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+gradlew text eol=lf
+*.bat text eol=crlf
+*.jar binary
+*.png binary
+*.nbt binary
+src/main/resources/META-INF/MANIFEST.MF -whitespace

@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "smart_aul",
+  "version": "1.1.0-dev",
+  "name": "Smart Aul",
+  "description": "Autonomous villagers, growing towns and independent settlements.",
+  "authors": [
+    "OceanofGames"
+  ],
+  "license": "All Rights Reserved",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.smartcolonies.SmartColoniesMod"
+    ]
+  },
+  "mixins": [
+    "smart_aul.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.18.4",
+    "minecraft": "~1.21.11",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}

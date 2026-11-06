@@ -1,0 +1,55 @@
+plugins {
+    id 'fabric-loom' version '1.15.5'
+}
+
+group = 'net.smartaul'
+version = '1.1.0-dev'
+
+repositories { mavenCentral() }
+
+dependencies {
+    minecraft 'com.mojang:minecraft:1.21.11'
+    // Preserve the original intermediary identifiers, including Mixin selectors.
+    mappings files('recovery/intermediary-dev-mappings.jar')
+    modImplementation 'net.fabricmc:fabric-loader:0.18.4'
+    modImplementation 'net.fabricmc.fabric-api:fabric-api:0.141.4+1.21.11'
+}
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(21)
+    withSourcesJar()
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 21
+    options.compilerArgs += ['-Xmaxerrs', '1000']
+}
+
+// The original LICENSE is already present in src/main/resources.
+
+// Plain Java checks exercise the real persistence classes and bounded growth rules.
+sourceSets {
+    regression {
+        compileClasspath += sourceSets.main.output + configurations.testCompileClasspath
+        runtimeClasspath += output + compileClasspath + configurations.testRuntimeClasspath
+    }
+}
+tasks.register('developmentRegression', JavaExec) {
+    dependsOn regressionClasses
+    classpath = sourceSets.regression.runtimeClasspath
+    mainClass = 'net.smartcolonies.r.DevelopmentRegression'
+    workingDir = projectDir
+}
+tasks.named('check') { dependsOn 'developmentRegression' }
+
+// Isolated dedicated-server smoke test; never opens the user's client save in place.
+loom {
+    runs {
+        developmentServer {
+            server()
+            runDir 'recovery/development-server'
+            programArgs 'nogui'
+        }
+    }
+}
