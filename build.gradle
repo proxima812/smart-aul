@@ -53,3 +53,22 @@ loom {
         }
     }
 }
+
+// Loom keeps the test mod separate from the release mod and its JAR.
+fabricApi {
+    configureTests {
+        createSourceSet = true
+        modId = "smart_aul_gametest"
+        enableGameTests = true
+        enableClientGameTests = false
+    }
+}
+loom.runs.gameTest {
+    runDir 'build/gametest'
+    // configureTests already supplies -Dfabric-api.gametest.
+    vmArg '-Dfabric-api.gametest.filter=smart_aul_gametest:*'
+    vmArg "-Dfabric-api.gametest.report-file=${layout.buildDirectory.file('reports/gametest/results.xml').get().asFile.absolutePath}"
+}
+tasks.named('runGameTest') {
+    doFirst { layout.buildDirectory.dir('reports/gametest').get().asFile.mkdirs() }
+}

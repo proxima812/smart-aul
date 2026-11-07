@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "smart_aul_gametest",
+  "version": "1.0.0",
+  "name": "Smart Aul server integration tests",
+  "environment": "server",
+  "mixins": ["smart_aul_gametest.mixins.json"],
+  "entrypoints": {
+    "fabric-gametest": ["net.smartaul.village.VillageGameTests"]
+  },
+  "depends": {
+    "smart_aul": "*",
+    "fabric-gametest-api-v1": "*"
+  }
+}
