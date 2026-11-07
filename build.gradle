@@ -10,7 +10,7 @@ repositories { mavenCentral() }
 dependencies {
     minecraft 'com.mojang:minecraft:1.21.11'
     // Preserve the original intermediary identifiers, including Mixin selectors.
-    mappings files('recovery/intermediary-dev-mappings.jar')
+    mappings files('gradle/mappings/intermediary-dev-mappings.jar')
     modImplementation 'net.fabricmc:fabric-loader:0.18.4'
     modImplementation 'net.fabricmc.fabric-api:fabric-api:0.141.4+1.21.11'
 }
@@ -38,7 +38,7 @@ sourceSets {
 tasks.register('developmentRegression', JavaExec) {
     dependsOn regressionClasses
     classpath = sourceSets.regression.runtimeClasspath
-    mainClass = 'net.smartcolonies.r.DevelopmentRegression'
+    mainClass = 'net.smartaul.village.DevelopmentRegression'
     workingDir = projectDir
 }
 tasks.named('check') { dependsOn 'developmentRegression' }
@@ -48,7 +48,7 @@ loom {
     runs {
         developmentServer {
             server()
-            runDir 'recovery/development-server'
+            runDir 'run/servers/development'
             programArgs 'nogui'
         }
     }

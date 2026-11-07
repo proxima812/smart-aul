@@ -1,0 +1,99 @@
+[17:18:44] [main/INFO] (FabricLoader/GameProvider) Loading Minecraft 1.21.11 with Fabric Loader 0.18.4
+[17:18:44] [main/INFO] (FabricLoader) Loading 43 mods:
+	- fabric-api 0.141.4+1.21.11
+	- fabric-api-base 1.0.5+4ebb5c083e
+	- fabric-api-lookup-api-v1 1.6.114+20dc27073e
+	- fabric-biome-api-v1 17.1.1+4fc5413f3e
+	- fabric-block-api-v1 1.1.10+4ebb5c083e
+	- fabric-block-view-api-v2 1.0.39+4ebb5c083e
+	- fabric-command-api-v2 2.4.7+6b42a6003e
+	- fabric-content-registries-v0 10.2.14+4fc5413f3e
+	- fabric-convention-tags-v1 2.1.55+7f945d5b3e
+	- fabric-convention-tags-v2 2.17.3+8ef948ba3e
+	- fabric-crash-report-info-v1 0.3.23+4ebb5c083e
+	- fabric-data-attachment-api-v1 1.8.48+eed0806f3e
+	- fabric-data-generation-api-v1 23.4.1+69974c4e3e
+	- fabric-dimensions-v1 4.0.28+4fc5413f3e
+	- fabric-entity-events-v1 3.1.1+1d0ab4303e
+	- fabric-events-interaction-v0 4.1.1+3b89ecf63e
+	- fabric-game-rule-api-v1 2.0.3+4fc5413f3e
+	- fabric-gametest-api-v1 3.1.27+4fc5413f3e
+	- fabric-item-api-v1 11.5.20+d0c46b9e3e
+	- fabric-item-group-api-v1 4.2.36+4fc5413f3e
+	- fabric-lifecycle-events-v1 2.6.15+4ebb5c083e
+	- fabric-loot-api-v2 3.0.73+3f89f5a53e
+	- fabric-loot-api-v3 2.0.20+78c8b4663e
+	- fabric-message-api-v1 6.1.12+4ebb5c083e
+	- fabric-networking-api-v1 5.1.6+6b6d71a53e
+	- fabric-object-builder-api-v1 21.1.40+4fc5413f3e
+	- fabric-particles-v1 4.2.12+4fc5413f3e
+	- fabric-recipe-api-v1 8.2.4+4ebb5c083e
+	- fabric-registry-sync-v0 6.2.6+1718722b3e
+	- fabric-rendering-fluids-v1 3.1.43+4ebb5c083e
+	- fabric-resource-conditions-api-v1 5.0.35+4fc5413f3e
+	- fabric-resource-loader-v0 3.3.4+4fc5413f3e
+	- fabric-resource-loader-v1 1.0.10+78c8b4663e
+	- fabric-screen-handler-api-v1 1.3.162+4fc5413f3e
+	- fabric-serialization-api-v1 1.0.5+4ebb5c083e
+	- fabric-tag-api-v1 1.2.20+4fc5413f3e
+	- fabric-transfer-api-v1 6.0.25+4fc5413f3e
+	- fabric-transitive-access-wideners-v1 7.1.0+014c8cec3e
+	- fabricloader 0.18.4
+	- java 21
+	- minecraft 1.21.11
+	- mixinextras 0.5.0
+	- smart_aul 1.1.0-dev
+[17:18:44] [main/INFO] (FabricLoader/Mixin) SpongePowered MIXIN Subsystem Version=0.8.7 Source=file:/C:/Users/proxima/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.17.0+mixin.0.8.7/cf31463202f72d03b0ef1e1e38e8ee71b7faaab6/sponge-mixin-0.17.0+mixin.0.8.7.jar Service=Knot/Fabric Env=SERVER
+[17:18:44] [main/INFO] (FabricLoader/Mixin) Loaded Fabric development mappings for mixin remapper!
+[17:18:44] [main/INFO] (FabricLoader/Mixin) Compatibility level set to JAVA_21
+[17:18:44] [main/INFO] (FabricLoader/MixinExtras|Service) Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.0).
+[17:18:57] [main/INFO] (smart_aul) Smart Aul initialized for generated vanilla villages
+[17:18:57] [main/INFO] (Minecraft) Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, profilesHost=https://api.mojang.com, name=PROD]
+[17:19:02] [main/INFO] (Minecraft) Loaded 1470 recipes
+[17:19:02] [main/INFO] (Minecraft) Loaded 1584 advancements
+[17:19:02] [main/INFO] (BiomeModificationImpl) Applied 0 biome modifications to 0 of 65 new biomes in 14.12 ms
+[17:19:02] [Server thread/INFO] (Minecraft) Starting minecraft server version 1.21.11
+[17:19:02] [Server thread/INFO] (Minecraft) Loading properties
+[17:19:02] [Server thread/INFO] (Minecraft) Default game type: SURVIVAL
+[17:19:02] [Server thread/INFO] (Minecraft) Generating keypair
+[17:19:03] [Server thread/INFO] (Minecraft) Starting Minecraft server on 127.0.0.1:25585
+[17:19:03] [Server thread/WARN] (Minecraft) **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[17:19:03] [Server thread/WARN] (Minecraft) The server will make no attempt to authenticate usernames. Beware.
+[17:19:03] [Server thread/WARN] (Minecraft) While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[17:19:03] [Server thread/WARN] (Minecraft) To change this, set "online-mode" to "true" in the server.properties file.
+[17:19:03] [Server thread/INFO] (Minecraft) Preparing level "world"
+[17:19:06] [Server thread/INFO] (Minecraft) Loading 620 persistent chunks...
+[17:19:06] [Server thread/INFO] (Minecraft) Preparing spawn area: 1%
+[17:19:06] [Server thread/INFO] (Minecraft) Preparing spawn area: 1%
+[17:19:07] [Server thread/INFO] (Minecraft) Preparing spawn area: 1%
+[17:19:07] [Server thread/INFO] (Minecraft) Preparing spawn area: 1%
+[17:19:08] [Server thread/INFO] (Minecraft) Preparing spawn area: 1%
+[17:19:08] [Server thread/INFO] (Minecraft) Preparing spawn area: 1%
+[17:19:09] [Server thread/INFO] (Minecraft) Preparing spawn area: 4%
+[17:19:09] [Server thread/INFO] (Minecraft) Time elapsed: 3404 ms
+[17:19:09] [Server thread/INFO] (Minecraft) Done (6.145s)! For help, type "help"
+[17:19:09] [Server thread/INFO] (Minecraft) Starting remote control listener
+[17:19:09] [Server thread/INFO] (Minecraft) Thread RCON Listener started
+[17:19:09] [Server thread/INFO] (Minecraft) RCON running on 127.0.0.1:25586
+[17:19:12] [Server thread/WARN] (Minecraft) Can't keep up! Is the server overloaded? Running 2029ms or 40 ticks behind
+[17:19:25] [Server thread/INFO] (Minecraft) Творческий город: 40 минут при 20 TPS, 6 деревень, 72 дома и мастерские, склады, фермы, фонари и дороги. Бесплатные материалы, до 256 блоков стройки за тик. Районы загружаются автоматически. Только тестовый мир: изменения сохраняются. /smart_aul dev creative status | stop
+[17:19:25] [Server thread/INFO] (Minecraft) Творческий город: строится; 0/40 мин; деревни 1/6; здания 1/72; дороги 0/7695; фермы/свет 0/348; препятствия дорог/ферм 0/0; Подготовка районов
+[17:19:31] [Server thread/WARN] (Minecraft) Can't keep up! Is the server overloaded? Running 3225ms or 64 ticks behind
+[17:19:53] [Server thread/INFO] (Minecraft) Творческий город: строится; 0/40 мин; деревни 1/6; здания 2/72; дороги 0/7695; фермы/свет 0/348; препятствия дорог/ферм 0/0; Не подходит площадка района 1 @ 818, 75, 340
+[17:19:57] [Server thread/WARN] (Minecraft) Can't keep up! Is the server overloaded? Running 11129ms or 222 ticks behind
+[17:20:15] [Server thread/WARN] (Minecraft) Can't keep up! Is the server overloaded? Running 3213ms or 64 ticks behind
+[17:20:22] [Server thread/INFO] (Minecraft) Творческий город: остановлен; 0/40 мин; деревни 1/6; здания 2/72; дороги 0/7695; фермы/свет 0/348; препятствия дорог/ферм 0/0; Остановлено командой; постройки сохранены
+[17:20:22] [Server thread/INFO] (Minecraft) Творческий город: остановлен; 0/40 мин; деревни 1/6; здания 2/72; дороги 0/7695; фермы/свет 0/348; препятствия дорог/ферм 0/0; Остановлено командой; постройки сохранены
+[17:20:22] [Server thread/INFO] (Minecraft) 396 force loaded chunks were found in minecraft:overworld at: [12, 15], [13, 15], [14, 15], [15, 15], [16, 15], [17, 15], [18, 15], [19, 15], [20, 15], [21, 15], [22, 15], [23, 15], [24, 15], [25, 15], [26, 15], [27, 15], [12, 16], [13, 16], [14, 16], [15, 16], [16, 16], [17, 16], [18, 16], [19, 16], [20, 16], [21, 16], [22, 16], [23, 16], [24, 16], [25, 16], [26, 16], [27, 16], [12, 17], [13, 17], [14, 17], [15, 17], [16, 17], [17, 17], [18, 17], [19, 17], [20, 17], [21, 17], [22, 17], [23, 17], [24, 17], [25, 17], [26, 17], [27, 17], [12, 18], [13, 18], [14, 18], [15, 18], [16, 18], [17, 18], [18, 18], [19, 18], [20, 18], [21, 18], [22, 18], [23, 18], [24, 18], [25, 18], [26, 18], [27, 18], [12, 19], [13, 19], [14, 19], [15, 19], [16, 19], [17, 19], [18, 19], [19, 19], [20, 19], [21, 19], [22, 19], [23, 19], [24, 19], [25, 19], [26, 19], [27, 19], [12, 20], [13, 20], [14, 20], [15, 20], [16, 20], [17, 20], [18, 20], [19, 20], [20, 20], [21, 20], [22, 20], [23, 20], [24, 20], [25, 20], [26, 20], [27, 20], [28, 20], [29, 20], [30, 20], [31, 20], [32, 20], [33, 20], [34, 20], [35, 20], [36, 20], [37, 20], [38, 20], [39, 20], [40, 20], [41, 20], [42, 20], [43, 20], [44, 20], [45, 20], [46, 20], [47, 20], [12, 21], [13, 21], [14, 21], [15, 21], [16, 21], [17, 21], [18, 21], [19, 21], [20, 21], [21, 21], [22, 21], [23, 21], [24, 21], [25, 21], [26, 21], [27, 21], [28, 21], [29, 21], [30, 21], [31, 21], [32, 21], [33, 21], [34, 21], [35, 21], [36, 21], [37, 21], [38, 21], [39, 21], [40, 21], [41, 21], [42, 21], [43, 21], [44, 21], [45, 21], [46, 21], [47, 21], [12, 22], [13, 22], [14, 22], [15, 22], [16, 22], [17, 22], [18, 22], [19, 22], [20, 22], [21, 22], [22, 22], [23, 22], [24, 22], [25, 22], [26, 22], [27, 22], [28, 22], [29, 22], [30, 22], [31, 22], [32, 22], [33, 22], [34, 22], [35, 22], [36, 22], [37, 22], [38, 22], [39, 22], [40, 22], [41, 22], [42, 22], [43, 22], [44, 22], [45, 22], [46, 22], [47, 22], [12, 23], [13, 23], [14, 23], [15, 23], [16, 23], [17, 23], [18, 23], [19, 23], [20, 23], [21, 23], [22, 23], [23, 23], [24, 23], [25, 23], [26, 23], [27, 23], [28, 23], [29, 23], [30, 23], [31, 23], [32, 23], [33, 23], [34, 23], [35, 23], [36, 23], [37, 23], [38, 23], [39, 23], [40, 23], [41, 23], [42, 23], [43, 23], [44, 23], [45, 23], [46, 23], [47, 23], [12, 24], [13, 24], [14, 24], [15, 24], [16, 24], [17, 24], [18, 24], [19, 24], [20, 24], [21, 24], [22, 24], [23, 24], [24, 24], [25, 24], [26, 24], [27, 24], [28, 24], [29, 24], [30, 24], [31, 24], [32, 24], [33, 24], [34, 24], [35, 24], [36, 24], [37, 24], [38, 24], [39, 24], [40, 24], [41, 24], [42, 24], [43, 24], [44, 24], [45, 24], [46, 24], [47, 24], [12, 25], [13, 25], [14, 25], [15, 25], [16, 25], [17, 25], [18, 25], [19, 25], [20, 25], [21, 25], [22, 25], [23, 25], [24, 25], [25, 25], [26, 25], [27, 25], [28, 25], [29, 25], [30, 25], [31, 25], [32, 25], [33, 25], [34, 25], [35, 25], [36, 25], [37, 25], [38, 25], [39, 25], [40, 25], [41, 25], [42, 25], [43, 25], [44, 25], [45, 25], [46, 25], [47, 25], [12, 26], [13, 26], [14, 26], [15, 26], [16, 26], [17, 26], [18, 26], [19, 26], [20, 26], [21, 26], [22, 26], [23, 26], [24, 26], [25, 26], [26, 26], [27, 26], [28, 26], [29, 26], [30, 26], [31, 26], [32, 26], [33, 26], [34, 26], [35, 26], [36, 26], [37, 26], [38, 26], [39, 26], [40, 26], [41, 26], [42, 26], [43, 26], [44, 26], [45, 26], [46, 26], [47, 26], [12, 27], [13, 27], [14, 27], [15, 27], [16, 27], [17, 27], [18, 27], [19, 27], [20, 27], [21, 27], [22, 27], [23, 27], [24, 27], [25, 27], [26, 27], [27, 27], [12, 28], [13, 28], [14, 28], [15, 28], [16, 28], [17, 28], [18, 28], [19, 28], [20, 28], [21, 28], [22, 28], [23, 28], [24, 28], [25, 28], [26, 28], [27, 28], [12, 29], [13, 29], [14, 29], [15, 29], [16, 29], [17, 29], [18, 29], [19, 29], [20, 29], [21, 29], [22, 29], [23, 29], [24, 29], [25, 29], [26, 29], [27, 29], [12, 30], [13, 30], [14, 30], [15, 30], [16, 30], [17, 30], [18, 30], [19, 30], [20, 30], [21, 30], [22, 30], [23, 30], [24, 30], [25, 30], [26, 30], [27, 30]
+[17:20:22] [Server thread/INFO] (Minecraft) Stopping the server
+[17:20:22] [Server thread/INFO] (Minecraft) Stopping server
+[17:20:22] [Server thread/INFO] (Minecraft) Saving players
+[17:20:22] [Server thread/INFO] (Minecraft) Saving worlds
+[17:20:23] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[Independent Villagers Recovery T]'/minecraft:overworld
+[17:20:26] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[Independent Villagers Recovery T]'/minecraft:the_end
+[17:20:26] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[Independent Villagers Recovery T]'/minecraft:the_nether
+[17:20:26] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (world): All chunks are saved
+[17:20:26] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[17:20:26] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[17:20:26] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage: All dimensions are saved
+[17:20:26] [Server thread/INFO] (Minecraft) Thread RCON Listener stopped

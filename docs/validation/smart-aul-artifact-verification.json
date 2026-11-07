@@ -1,0 +1,38 @@
+{
+  "jar": "C:\\Users\\proxima\\Documents\\Codex\\2026-11-06\\new-chat-2\\outputs\\independent-villagers-decompiled\\dist\\smart-aul-1.1.0-dev.jar",
+  "sha256": "bcb207411fa8a16b602be6d79e641ec2d16370aded2229ff1c0b99dfb0b943de",
+  "size": 3174508,
+  "metadata": {
+    "schemaVersion": 1,
+    "id": "smart_aul",
+    "version": "1.1.0-dev",
+    "name": "Smart Aul",
+    "description": "Autonomous villagers, growing towns and independent settlements.",
+    "authors": [
+      "OceanofGames"
+    ],
+    "license": "All Rights Reserved",
+    "environment": "*",
+    "entrypoints": {
+      "main": [
+        "net.smartcolonies.SmartColoniesMod"
+      ]
+    },
+    "mixins": [
+      "smart_aul.mixins.json"
+    ],
+    "depends": {
+      "fabricloader": ">=0.18.4",
+      "minecraft": "~1.21.11",
+      "java": ">=21",
+      "fabric-api": "*"
+    }
+  },
+  "zip_and_source_archive": "PASS",
+  "entrypoints_and_mixins": "PASS",
+  "regression_checks": 40,
+  "build": "PASS",
+  "dedicated_server": "PASS",
+  "small_settlement_roles": "PASS",
+  "natural_city_growth_and_full_terrain_expedition": "NOT VERIFIED"
+}

@@ -11,7 +11,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.smartcolonies.SmartColoniesMod"
+      "net.smartaul.SmartAulMod"
     ]
   },
   "mixins": [

@@ -1,0 +1,89 @@
+{
+  "test_world": "run/servers/navigation-safety/world",
+  "mode": "copy of development test world; accelerated creative construction; stopped and reloaded",
+  "colonies_after_reload": [
+    {
+      "core": [
+        318,
+        65,
+        372
+      ],
+      "halls": [
+        {
+          "id": "13ad5256-d03b-49a2-b1a0-3d4b7770ce5d",
+          "origin": [
+            286,
+            65,
+            405
+          ],
+          "status": "QUEUED",
+          "next_block": 0,
+          "total_blocks": 0
+        }
+      ],
+      "pending_covers": 0,
+      "completed_covers": 0
+    },
+    {
+      "core": [
+        718,
+        65,
+        372
+      ],
+      "halls": [
+        {
+          "id": "7f05193d-0f95-46a5-943d-780b38f42b80",
+          "origin": [
+            722,
+            78,
+            388
+          ],
+          "status": "COMPLETE",
+          "next_block": 1545,
+          "total_blocks": 1545
+        }
+      ],
+      "pending_covers": 0,
+      "completed_covers": 1
+    },
+    {
+      "core": [
+        558,
+        64,
+        636
+      ],
+      "halls": [],
+      "pending_covers": 0,
+      "completed_covers": 0
+    }
+  ],
+  "board_server_nbt": [
+    {
+      "time": 1793985548.6569073,
+      "command": "data get block 724 80 389",
+      "result": "724, 80, 389 has the following block data: {back_text: {has_glowing_text: 0b, color: \"black\", messages: [\"\", \"\", \"\", \"\"]}, components: {}, is_waxed: 0b, x: 724, y: 80, z: 389, id: \"minecraft:sign\", front_text: {has_glowing_text: 0b, color: \"black\", messages: [\"РАТУША\", \"Жителей: 26\", \"Готово: 10\", \"ПКМ: все планы\"]}}"
+    },
+    {
+      "time": 1793985549.2338786,
+      "command": "data get block 726 80 389",
+      "result": "726, 80, 389 has the following block data: {back_text: {has_glowing_text: 0b, color: \"black\", messages: [\"\", \"\", \"\", \"\"]}, components: {}, is_waxed: 0b, x: 726, y: 80, z: 389, id: \"minecraft:sign\", front_text: {has_glowing_text: 0b, color: \"black\", messages: [\"ПЛАН РАБОТ\", \"Строек: 1\", \"Дорог: 0\", \"Провалов: 0\"]}}"
+    },
+    {
+      "time": 1793985549.9034586,
+      "command": "data get block 728 80 389",
+      "result": "728, 80, 389 has the following block data: {back_text: {has_glowing_text: 0b, color: \"black\", messages: [\"\", \"\", \"\", \"\"]}, components: {}, is_waxed: 0b, x: 728, y: 80, z: 389, id: \"minecraft:sign\", front_text: {has_glowing_text: 0b, color: \"black\", messages: [\"ЗАПАСЫ\", \"Еда: 2687\", \"Дерево: 632\", \"Камень: 1632\"]}}"
+    },
+    {
+      "time": 1793985658.314971,
+      "command": "data get block 724 80 389",
+      "result": "724, 80, 389 has the following block data: {back_text: {has_glowing_text: 0b, color: \"black\", messages: [\"\", \"\", \"\", \"\"]}, components: {}, is_waxed: 0b, x: 724, y: 80, z: 389, id: \"minecraft:sign\", front_text: {has_glowing_text: 0b, color: \"black\", messages: [\"РАТУША\", \"Жителей: 26\", \"Готово: 10\", \"ПКМ: все планы\"]}}"
+    }
+  ],
+  "jar_sha256": "24bdbb9d82d637b71168e3b2aaf10ea39e350dff32d04d07f47610b03df7568b",
+  "limits": [
+    "No client click or visual verification",
+    "No survival materials or protected-land live scenario",
+    "No controlled measurement of pathfinding speedup",
+    "Completed safety counter alone does not prove the geometry or cause of that placement"
+  ]
+}

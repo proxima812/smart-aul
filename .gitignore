@@ -2,13 +2,6 @@
 build/
 run/
 *.class
-recovery/normalized-source/
-recovery/constant-requests.tsv
-recovery/constant-results.txt
-
-# Isolated local-only dedicated-server test data
-recovery/development-server/
-
 # Local environments, logs, caches and built mod archives
 logs/
 dist/
@@ -28,8 +21,5 @@ __pycache__/
 *.jks
 *.keystore
 
-# Recovery scratch data and local test evidence; the mapping is needed to build.
-recovery/*
-!recovery/intermediary-dev-mappings.jar
-!recovery/smart-aul-validation.md
-!recovery/RESTORATION_README_RU.md
+# Keep selected validation evidence; generated server data stays under run/.
+!docs/validation/creative-city-smoke.log
