@@ -256,7 +256,9 @@ public final class CreativeCityMode {
       if (names.isEmpty()) { p.message = "Нет шаблонов зданий"; return; }
       int preferred = completed % 3 == 2 && !services.isEmpty() ? homes.size() + (completed / 3) % services.size() : completed % Math.max(1, homes.size());
       String name = names.get((preferred + p.failedTemplates) % names.size());
-      var template = TownHall.exists(c) ? HouseTemplateRegistry.x4jnab85o8lop("plains", name) : TownHall.TEMPLATE;
+      var template = !TownHall.exists(c) ? TownHall.TEMPLATE
+         : VillageLeisure.needsTavern(c, SmartAulConfig.x2by5f9ehxvwk9().village) ? VillageLeisure.TEMPLATE
+         : HouseTemplateRegistry.x4jnab85o8lop("plains", name);
       var structure = world.method_14183().method_15094(template);
       if (structure.isEmpty()) { p.message = "Не найден шаблон " + name; return; }
       var size = structure.get().method_15160();

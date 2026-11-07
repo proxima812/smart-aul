@@ -90,7 +90,7 @@ public final class TownHall {
       for (var job : colony.x1ja61emeln2hc()) counts.merge(job.x32oz43hmeynhc(), 1L, Long::sum);
       counts.forEach((status, count) -> lines.add(statusName(status) + ": " + count));
       colony.x1ja61emeln2hc().stream().filter(j -> j.x32oz43hmeynhc() != ConstructionStatus.COMPLETE).limit(8).forEach(job ->
-         lines.add((isHall(job) ? "Ратуша" : job.x3kqe1qjsw9oty().method_12832()) + " @ " + job.x3ij6gescvakv2().method_23854()
+         lines.add((isHall(job) ? "Ратуша" : VillageLeisure.isTavern(job) ? "Таверна" : job.x3kqe1qjsw9oty().method_12832()) + " @ " + job.x3ij6gescvakv2().method_23854()
             + ": " + statusName(job.x32oz43hmeynhc()) + " " + job.xmu75rcopbjnh() + "/" + job.xxjwqetbgzzle()));
       var pending = colony.x1ja61emeln2hc().stream().filter(j -> j.x32oz43hmeynhc() != ConstructionStatus.COMPLETE).findFirst();
       pending.ifPresent(job -> {

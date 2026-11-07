@@ -5,6 +5,7 @@ public final class VillageConfig {
    public int development_speed = 3;
    public int builder_blocks_per_action = 3;
    public int city_population = 32;
+   public int tavern_min_population = 10;
    public int city_houses = 12;
    public boolean automatic_settlement_requires_city = true;
    public int settlement_min_population = 24;

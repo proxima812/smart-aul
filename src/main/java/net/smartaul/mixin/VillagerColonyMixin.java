@@ -161,6 +161,7 @@ public abstract class VillagerColonyMixin {
             .filter(
                var0 -> var0.equals(ColonyActivities.x12qpuae7zsr5m)
                   || var0.equals(ColonyActivities.x2t145qayl7tz3)
+                  || var0.equals(ColonyActivities.LEISURE)
                   || var0.equals(ColonyActivities.x38u24k78sk73y)
                   || var0.equals(class_4168.field_22396)
             )
@@ -311,7 +312,8 @@ public abstract class VillagerColonyMixin {
                                  ? class_4168.field_18597
                                  : (
                                     var6 != ColonyRole.GUARD || !var13 && !var7 && !(var3.method_6032() < var3.method_6063() * 0.3F)
-                                       ? (var14 ? ColonyActivities.x12qpuae7zsr5m : null)
+                                       ? (var14 ? ColonyActivities.x12qpuae7zsr5m
+                                          : !var7 && net.smartaul.village.VillageLeisure.visit(var1, var5, var3) ? ColonyActivities.LEISURE : null)
                                        : class_4168.field_22396
                                  )
                            );
@@ -323,6 +325,7 @@ public abstract class VillagerColonyMixin {
                               var0 -> var0.equals(class_4168.field_22396)
                                  || var0.equals(ColonyActivities.x12qpuae7zsr5m)
                                  || var0.equals(ColonyActivities.x2t145qayl7tz3)
+                                 || var0.equals(ColonyActivities.LEISURE)
                            )
                            .isPresent()) {
                            var3.method_18868().method_18871(var1.method_75728(), var1.method_75260(), var3.method_73189());
@@ -441,6 +444,7 @@ public abstract class VillagerColonyMixin {
    private void smartAul$onInitBrainTail(class_4095<class_1646> var1, CallbackInfo var2) {
       var1.method_18881(ColonyActivities.x2t145qayl7tz3, ImmutableList.of());
       var1.method_18881(ColonyActivities.x38u24k78sk73y, ImmutableList.of(Pair.of(0, new RaidShelterTask())));
+      var1.method_18881(ColonyActivities.LEISURE, ImmutableList.of(Pair.of(0, new net.smartaul.village.LeisureTask())));
       var1.method_18881(class_4168.field_22396, ImmutableList.of(Pair.of(0, new GuardTask())));
       var1.method_18881(
          ColonyActivities.x12qpuae7zsr5m,

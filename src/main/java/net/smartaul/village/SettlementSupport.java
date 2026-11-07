@@ -89,6 +89,6 @@ public final class SettlementSupport {
       long houses = completedHouses(colony);
       return "Уровень: " + DevelopmentPolicy.stage(colony.population(), houses, config)
          + ". До города: население " + colony.population() + "/" + config.city_population
-         + ", общественные дома " + houses + "/" + config.city_houses + ". Темп: x" + config.development_speed + ".";
+         + ", общественные дома " + houses + "/" + config.city_houses + ". Темп: x" + config.development_speed + ". " + VillageLeisure.summary(colony);
    }
 }
