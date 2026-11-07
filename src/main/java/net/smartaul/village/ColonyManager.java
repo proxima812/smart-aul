@@ -86,6 +86,7 @@ public final class ColonyManager {
       ConstructionManager.x2rwu2l29t4lpj();
       VillageSleep.x2ik4hs9xwj2v7();
       RaidShelterTask.clearRuntimeCaches();
+      VillageLeisure.clearRuntimeCaches();
       ActionTrace.close();
    }
 
@@ -1663,7 +1664,7 @@ public final class ColonyManager {
                   boolean var4 = var1.x3t9uchcxi5zlm().isPresent();
                   boolean var5 = var1.x182p7mjnr75sg() < x1ext6bk0354f9(var1.population());
                   boolean var6 = var2 < SmartAulConfig.x2by5f9ehxvwk9().village.max_constructed_houses;
-                  if (var5 || var6 || var4) {
+                  if (var5 || var6 || var4 || VillageLeisure.needsTavern(var1, SmartAulConfig.x2by5f9ehxvwk9().village)) {
                      if (!var1.x3e4ycl8cmmmgc()) {
                         class_2960 var7 = var4 ? x24xpzm43k9cqb(var0, var1, var1.x1beis4altbswn()) : xvg326225w07a(var0, var1);
                         var var8 = var0.method_14183().method_15094(var7);
@@ -1717,7 +1718,8 @@ public final class ColonyManager {
       if (CreativeCityMode.contains(var0, var1)) return;
       if (SmartAulConfig.x2by5f9ehxvwk9().roles.enable_auto_expansion && !var1.x3e4ycl8cmmmgc() && var0.method_75260() >= var1.x147mtuve9wuay()) {
          long var2 = var1.x1ja61emeln2hc().stream().filter(var0x -> var0x.x2nfrt8qxdscso().isEmpty() && var0x.x2s8emavervqrz()).count();
-         if (var2 >= SmartAulConfig.x2by5f9ehxvwk9().village.max_constructed_houses) {
+         if (var2 >= SmartAulConfig.x2by5f9ehxvwk9().village.max_constructed_houses
+            && !VillageLeisure.needsTavern(var1, SmartAulConfig.x2by5f9ehxvwk9().village)) {
             var1.x23n2tdykuxd7a(0);
          } else {
             class_2960 var4 = xvg326225w07a(var0, var1);
@@ -1780,6 +1782,7 @@ public final class ColonyManager {
 
    private static class_2960 xvg326225w07a(class_3218 var0, Colony var1) {
       if (!TownHall.exists(var1)) return TownHall.TEMPLATE;
+      if (VillageLeisure.needsTavern(var1, SmartAulConfig.x2by5f9ehxvwk9().village)) return VillageLeisure.TEMPLATE;
       String var2 = var0.method_23753(var1.core()).method_40230().map(var0x -> var0x.method_29177().method_12832()).orElse("plains");
       String var3 = var2.contains("desert")
          ? "desert"

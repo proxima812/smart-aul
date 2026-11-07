@@ -8,6 +8,8 @@ public final class ColonyActivities {
    public static final class_4168 x38u24k78sk73y = ActivityInvoker.smartAul$register("smart_colonies:colony_shelter");
    public static final class_4168 x2t145qayl7tz3 = ActivityInvoker.smartAul$register("smart_colonies:colony_travel");
 
+   public static final class_4168 LEISURE = ActivityInvoker.smartAul$register("smart_colonies:colony_leisure");
+
    private ColonyActivities() {
    }
 

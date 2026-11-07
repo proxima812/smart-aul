@@ -24,6 +24,7 @@ public final class ColonyIdleTaskGate<E extends class_1309> implements class_789
                      var0 -> var0.equals(ColonyActivities.x12qpuae7zsr5m)
                         || var0.equals(ColonyActivities.x38u24k78sk73y)
                         || var0.equals(ColonyActivities.x2t145qayl7tz3)
+                        || var0.equals(ColonyActivities.LEISURE)
                   )
                   .isPresent()
          );
