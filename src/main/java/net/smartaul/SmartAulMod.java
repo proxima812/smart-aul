@@ -28,6 +28,7 @@ public final class SmartAulMod implements ModInitializer {
 
    public void onInitialize() {
       SmartAulConfig.xhwm4ut4yzbjy();
+      net.smartaul.blueprint.BlueprintNetworking.register();
       ColonyActivities.x1bu824b0po0bm();
       ColonyMemories.x2ve9opbgxakpk();
       ColonySensors.xyjj6h9u3nkbj();

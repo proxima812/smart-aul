@@ -78,7 +78,7 @@ public final class TownHall {
       return false;
    }
 
-   static List<String> details(class_3218 world, Colony colony) {
+   public static List<String> details(class_3218 world, Colony colony) {
       var lines = new ArrayList<String>();
       lines.add("Ратуша — планы поселения");
       lines.add(SettlementSupport.progress(colony));
@@ -89,30 +89,17 @@ public final class TownHall {
       var counts = new EnumMap<ConstructionStatus, Long>(ConstructionStatus.class);
       for (var job : colony.x1ja61emeln2hc()) counts.merge(job.x32oz43hmeynhc(), 1L, Long::sum);
       counts.forEach((status, count) -> lines.add(statusName(status) + ": " + count));
-      colony.x1ja61emeln2hc().stream().filter(j -> j.x32oz43hmeynhc() != ConstructionStatus.COMPLETE).limit(8).forEach(job ->
-         lines.add((isHall(job) ? "Ратуша" : job.x3kqe1qjsw9oty().method_12832()) + " @ " + job.x3ij6gescvakv2().method_23854()
-            + ": " + statusName(job.x32oz43hmeynhc()) + " " + job.xmu75rcopbjnh() + "/" + job.xxjwqetbgzzle()));
-      var pending = colony.x1ja61emeln2hc().stream().filter(j -> j.x32oz43hmeynhc() != ConstructionStatus.COMPLETE).findFirst();
-      pending.ifPresent(job -> {
-         var plan = HouseBuilderTask.loadPlan(world, job).orElse(List.of());
-         var missing = new TreeMap<String, Integer>();
-         for (int i = Math.min(job.xmu75rcopbjnh(), plan.size()); i < plan.size(); i++) {
-            var block = plan.get(i);
-            if (block.x3ln30gt147gjn() || !VillageSafety.loaded(world, block.x31k0w8t7ul189())
-               || world.method_8320(block.x31k0w8t7ul189()).equals(block.x2hmkda3gwcacx())) continue;
-            var item = HouseBuilderTask.materialItem(block.x2hmkda3gwcacx());
-            if (item != class_1802.field_8162) missing.merge(new class_1799(item).method_7964().getString(), 1, Integer::sum);
-         }
-         lines.add("Нужно установить для текущей стройки (без вычета запасов):");
-         missing.entrySet().stream().limit(8).forEach(e -> lines.add(e.getKey() + ": " + e.getValue()));
-      });
+      colony.x1ja61emeln2hc().stream().filter(j -> j.x32oz43hmeynhc() != ConstructionStatus.COMPLETE).limit(16)
+         .forEach(job -> lines.addAll(BuildingPlanSummary.describe(world, colony, job)));
+      if (colony.x1ja61emeln2hc().stream().filter(j -> j.x32oz43hmeynhc() != ConstructionStatus.COMPLETE).count() > 16)
+         lines.add("Показаны первые 16 строек.");
       lines.add("Далее: " + ColonyManager.x2y69zyuty3rxs(world, colony));
       String readiness = SettlementSupport.readiness(world, colony);
       lines.add("Переселение: " + (readiness.isEmpty() ? "запасы готовы, ожидается группа переселенцев" : readiness));
       return lines;
    }
 
-   private static String statusName(ConstructionStatus status) {
+   static String statusName(ConstructionStatus status) {
       return switch (status) {
          case COMPLETE -> "Выполнено";
          case QUEUED -> "Запланировано";
