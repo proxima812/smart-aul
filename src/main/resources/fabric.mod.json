@@ -10,6 +10,7 @@
   "license": "MIT",
   "environment": "*",
   "entrypoints": {
+    "client": ["net.smartaul.client.BlueprintClient"],
     "main": [
       "net.smartaul.SmartAulMod"
     ]

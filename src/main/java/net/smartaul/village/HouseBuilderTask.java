@@ -966,7 +966,7 @@ public final class HouseBuilderTask extends class_4097<class_1646> {
       }
    }
 
-   private static boolean x1zol2fshkzbul(class_2680 var0, class_2680 var1) {
+   static boolean x1zol2fshkzbul(class_2680 var0, class_2680 var1) {
       if (var0.method_26204() != var1.method_26204()) {
          return false;
       } else {
