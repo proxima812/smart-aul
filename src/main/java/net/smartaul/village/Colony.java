@@ -1031,7 +1031,9 @@ public final class Colony implements VillageCapability {
       var1.method_10569("building_search_cursor", this.x3buthex9xdlv1);
       var1.method_10569("last_beds", this.x1heehu7l48s14);
       class_2487 var3 = new class_2487();
-      this.x3k7syhtb17z1d.forEach((var1x, var2x) -> var3.method_10569(var1x.serializedName(), var2x));
+      // Canonical census includes zero roles, just as the reader does.
+      for (ColonyRole role : ColonyRole.values())
+         var3.method_10569(role.serializedName(), this.x3k7syhtb17z1d.getOrDefault(role, 0));
       var1.method_10566("labor_census", var3);
       class_2499 var4 = new class_2499();
       this.xh6wjg4rkkglx.forEach((var1x, var2x) -> {
@@ -1297,7 +1299,8 @@ public final class Colony implements VillageCapability {
       var1.parentColonyId = xu74m7p3sue9g(var0, "parent_colony");
       var1.xw7djz7rzgv6h = xu74m7p3sue9g(var0, "property_owner");
       var1.x1gy07vj24mbxq = Math.clamp((long)var0.method_68083("property_level", 0), 0, 3);
-      var1.x2ww0le5bwi4ag = x2oz9lsexq53ht(var0, "reported_thief");
+      // An absent optional suspect must remain absent across a save/load.
+      var1.x2ww0le5bwi4ag = readUuid(var0, "reported_thief", null);
       var1.x3ugpi3xl1enk9 = var0.method_68080("theft_until", 0L);
       var1.x1ke59hs5pt8hd = Math.max(0, var0.method_68083("stolen_items", 0));
       var1.xiumjw77zh0yh = var0.method_68080("next_breeding_tick", 0L);
@@ -1358,6 +1361,10 @@ public final class Colony implements VillageCapability {
    }
 
    private static UUID x2oz9lsexq53ht(class_2487 var0, String var1) {
+      return readUuid(var0, var1, UUID.randomUUID());
+   }
+
+   private static UUID readUuid(class_2487 var0, String var1, UUID fallback) {
       try {
          String var2 = var0.method_68564(var1, "");
          if (!var2.isEmpty()) {
@@ -1371,7 +1378,7 @@ public final class Colony implements VillageCapability {
       } catch (IllegalArgumentException var4) {
       }
 
-      return UUID.randomUUID();
+      return fallback;
    }
 
    private static UUID xu74m7p3sue9g(class_2487 var0, String var1) {
