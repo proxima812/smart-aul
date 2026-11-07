@@ -54,6 +54,7 @@ public final class DevelopmentRegression {
       net.minecraft.class_2966.method_12851();
       NavigationSafetyRegression.run();
       LogicRegression.run();
+      FuzzRegression.run();
       persistence();
       expeditionLoss();
       var dispatcher = new com.mojang.brigadier.CommandDispatcher<net.minecraft.class_2168>();

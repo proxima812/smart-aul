@@ -99,8 +99,15 @@ public final class CreativeCityPlan {
       return n;
    }
 
+   private static UUID readId(class_2487 n, String key) {
+      try { return UUID.fromString(n.method_68564(key, "")); }
+      catch (IllegalArgumentException error) { return null; }
+   }
+
    public static CreativeCityPlan fromNbt(class_2487 n) {
-      var p = new CreativeCityPlan(UUID.fromString(n.method_68564("root", "")),
+      UUID root = readId(n, "root");
+      boolean damagedIdentity = root == null;
+      var p = new CreativeCityPlan(root == null ? new UUID(0, 0) : root,
          class_2338.method_10092(n.method_68080("origin", 0L)));
       p.elapsed = Math.max(0L, n.method_68080("elapsed_ticks", n.method_68083("elapsed", 0)));
       p.frontier = Math.max(1L, n.method_68080("frontier", 1L));
@@ -117,13 +124,22 @@ public final class CreativeCityPlan {
       p.message = n.method_68564("message", "");
       p.colonies.clear();
       var list = n.method_68569("colonies");
-      for (int i = 0; i < list.size(); i++)
-         p.colonies.add(UUID.fromString(list.method_68582(i).method_68564("id", "")));
-      if (p.colonies.isEmpty() || !p.colonies.getFirst().equals(p.root)) throw new IllegalArgumentException("Missing city root");
+      for (int i = 0; i < list.size(); i++) {
+         UUID id = readId(list.method_68582(i), "id");
+         if (id != null) p.colonies.add(id);
+         else damagedIdentity = true;
+      }
+      if (p.colonies.isEmpty() || !p.colonies.getFirst().equals(p.root)) {
+         damagedIdentity = true;
+         p.colonies.remove(p.root);
+         p.colonies.addFirst(p.root);
+      }
+      // Preserve recoverable progress, but never resume a plan with damaged ownership.
+      if (damagedIdentity) p.active = false;
       var farmList = n.method_68569("farm_origins");
       for (int i = 0; i < farmList.size(); i++) {
          var entry = farmList.method_68582(i);
-         var id = UUID.fromString(entry.method_68564("id", ""));
+         var id = readId(entry, "id");
          if (p.colonies.contains(id)) p.farms.put(id, class_2338.method_10092(entry.method_68080("pos", 0L)));
       }
       for (long c : n.method_10565("owned_chunks").orElse(new long[0])) {

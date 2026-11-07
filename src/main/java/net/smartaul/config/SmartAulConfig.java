@@ -16,7 +16,6 @@ import net.smartaul.SmartAulMod;
 
 public final class SmartAulConfig {
    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-   private static final Path PATH = FabricLoader.getInstance().getConfigDir().resolve("smart_aul.json");
    private static SmartAulConfig instance = new SmartAulConfig();
    public VillageConfig village = new VillageConfig();
    public RoleConfig roles = new RoleConfig();
@@ -29,12 +28,13 @@ public final class SmartAulConfig {
    }
 
    public static void xhwm4ut4yzbjy() {
+      Path path = FabricLoader.getInstance().getConfigDir().resolve("smart_aul.json");
       try {
-         ConfigMigration.copyLegacy(PATH, PATH.resolveSibling("smart_colonies.json"));
+         ConfigMigration.copyLegacy(path, path.resolveSibling("smart_colonies.json"));
       } catch (IOException error) {
          SmartAulMod.LOGGER.error("Could not migrate legacy configuration", error);
       }
-      x2ce1ihtn5bm4e(PATH);
+      x2ce1ihtn5bm4e(path);
    }
 
    public static void x2ce1ihtn5bm4e(Path var0) {
