@@ -7,14 +7,14 @@
 
 | ID | Задача | Статус | Исполнитель | Ветка / место | Связи |
 |---|---|---|---|---|---|
-| T-001 | CI на GitHub Actions: `build` на JDK 21, `git diff --check` для PR, JAR как артефакт | ревью | Claude Opus 5.5 | `.github/workflows/build.yml` (не закоммичено) | B-001 |
+| T-001 | CI на GitHub Actions: `build` на JDK 21, `git diff --check` для PR, JAR как артефакт | ревью (не запускался на GitHub) | Claude Opus 5.5 | `integration/tests-buildings-leisure` @ `1b7608b` | B-001, R-004 |
 | T-002 | Fabric GameTest: отдельный source set, headless-запуск, 3–5 тестов в реальном мире | ревью (ждёт слияния T-007) | GPT-6.1 Sol (high) | `t3/808ed80a` @ `3b05573` | D-004, R-004, R-006 |
 | T-003 | Регрессии непокрытой логики: участки, резервирования, бюджет поиска, офлайн-развитие, экономика, торговля, рецепты | ревью (ждёт слияния T-007) | GPT-6.1 Sol (high) | `t3/4dbdc8cc` @ `6a996df` | R-005 |
 | T-004 | Fuzz/property-тесты: A* против Дейкстры на тысячах карт, битые NBT и конфиги | ревью (ждёт слияния T-007) | GPT-6.1 Sol (high) | `t3/7a5a01f9` @ `a814a54` | B-003…B-006, B-002 |
-| T-005 | Голограмма-схема построек (белые полупрозрачные блоки), `/smart_aul blueprint`, `/smart_aul plan` | в работе | GPT-6.1 Sol (high) | worktree делегата | D-002 |
+| T-005 | Голограмма-схема построек (белые полупрозрачные блоки), `/smart_aul blueprint`, `/smart_aul plan` | ревью (визуально не проверено) | GPT-6.1 Sol (high) | `t3/ecf997a5` @ `a3efd5a` | D-002, R-025, R-026 |
 | T-006 | Таверна и места отдыха, поведение отдыха вечером, опционально настроение | ревью (ждёт слияния T-007) | GPT-6.1 Sol (high) | `t3/3ac7392a` @ `0ad2dc0` | D-001, R-012, R-022, R-023 |
-| T-007 | Слияние веток T-002…T-006: свести строки в `DevelopmentRegression.main`, `fabric.mod.json`, `SmartAulMod`; полный `build` | todo | Claude Opus 5.5 | `main` после согласования | T-002…T-006 |
-| T-008 | Структура учёта прогресса `docs/project` и правила в `AGENTS.md` | готово | Claude Opus 5.5 | рабочая копия (не закоммичено) | — |
+| T-007 | Слияние веток T-002…T-006: свести строки в `DevelopmentRegression.main`, `fabric.mod.json`, `SmartAulMod`; полный `build` | готово (в `main` не слито) | Claude Opus 5.5 | `integration/tests-buildings-leisure` @ `e829ac9` | T-001…T-006 |
+| T-008 | Структура учёта прогресса `docs/project` и правила в `AGENTS.md` | готово | Claude Opus 5.5 | `integration/tests-buildings-leisure` @ `1b7608b` | — |
 
 ## Критерии готовности задачи
 
@@ -26,6 +26,31 @@
 ## Журнал готовых шагов
 
 Новые записи — сверху. Формат: дата, ID, что сделано, проверка, коммит/ветка, ограничения.
+
+- **2026-11-08 · T-007** — ветка `integration/tests-buildings-leisure` от `c21737d`:
+  коммит CI и учёта `1b7608b`, затем слияния T-003, T-002, T-004, T-006, T-005
+  (`e829ac9`). Конфликты: строки вызова регрессий в `DevelopmentRegression.main`
+  (оставлены все пять) и `TownHall.details` — взят общий вывод
+  `BuildingPlanSummary` из T-005, в него добавлена метка «таверна» из T-006.
+  Проверка координатора: `gradlew.bat clean build runGameTest` — BUILD SUCCESSFUL;
+  навигация/провалы/ратуша PASS, Logic 935 PASS, Fuzz PASS (3000 карт, 9750
+  поисков, 1000 NBT, 64 JSON; ≈1,5–1,8 с), таверна PASS, чертежи PASS,
+  Development 96 994 PASS; GameTest 4/4 PASS. В JAR нет классов gametest, есть
+  `tavern.nbt`, `BlueprintClient` и entrypoint `client`. `git diff --check` — PASS.
+  В `main` не слито, на GitHub не отправлено; игровое и визуальное поведение
+  голограммы и таверны не проверено.
+- **2026-11-08 · T-005** — S2C-снимок недостроенных блоков (`BlueprintPayload`,
+  `BlueprintNetworking`, `BlueprintPlans`): раз в 60 тиков каждому игроку с модом
+  (`canSend`), радиус 80, лимиты зданий/блоков и объёма 32 768; здание пропускается,
+  если пересекает участок игрока, блок игрока или выгруженный чанк. Клиент
+  `BlueprintClient`: белая геометрия моделей с прозрачностью 40 %, кэш вершин,
+  контуры. Команды `/smart_aul blueprint on|off|status` (включено по умолчанию,
+  настройка на сессию) и `/smart_aul plan`; общий вывод с ратушей
+  (`BuildingPlanSummary`, до 16 строек, нехватка с учётом загруженных запасов).
+  Проверка исполнителя: `gradlew.bat build` и `BlueprintRegression` — PASS, JAR
+  проверен, клиент запущен и закрыт в отдельном каталоге. Координатор просмотрел
+  правки. Ветка `t3/ecf997a5` @ `a3efd5a`. **Голограмма в мире визуально не
+  проверена, скриншота нет** → R-025. Снимок отправляется и без изменений → R-026.
 
 - **2026-11-08 · T-006** — своя схема `tavern.nbt` (зал 9×9 со стойкой, столами,
   лавками, освещением; двор со скамейками и декоративным колодцем), генератор
