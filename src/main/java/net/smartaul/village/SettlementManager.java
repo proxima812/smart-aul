@@ -609,7 +609,8 @@ public final class SettlementManager {
 
                      if (!var2.xfx95ux1xn73w() && !var8.method_6113() && !var8.method_18009()) {
                         if (var12) {
-                           VillagerNavigation.x3oupbjeq14mj8(var8);
+                           // Wait for stragglers without discarding the planned long route (B-002).
+                           VillagerNavigation.pause(var0, var8);
                         } else if (var8.method_24515().method_10262(var6) <= 9.0) {
                            if (var2.x13ua0ftegttnr() >= 24 && var11 && x14xuvjghdgxyq(var0, var8, var6)) {
                               var8.method_5942().method_6340();

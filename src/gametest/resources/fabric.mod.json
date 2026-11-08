@@ -7,7 +7,7 @@
   "mixins": ["smart_aul_gametest.mixins.json"],
   "entrypoints": {
     "fabric-client-gametest": ["net.smartaul.village.VisualGameTests"],
-    "fabric-gametest": ["net.smartaul.village.VillageGameTests", "net.smartaul.village.ConstructionGameTests", "net.smartaul.village.OfflineBudgetGameTests"]
+    "fabric-gametest": ["net.smartaul.village.VillageGameTests", "net.smartaul.village.ConstructionGameTests", "net.smartaul.village.OfflineBudgetGameTests", "net.smartaul.village.ExpeditionRouteGameTests"]
   },
   "depends": {
     "smart_aul": "*",

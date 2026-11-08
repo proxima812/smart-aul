@@ -16,6 +16,9 @@ final class NavigationState {
    int x2n9nq6uu09ugo;
    long x220dzuvs9upmh;
    class_11 x1h7unpbxmmlly;
+   /** Long-route A* continued across ticks; null when no search is in progress. */
+   NavigationSearch.Session search;
+   long searchTick;
 
    NavigationState() {
    }

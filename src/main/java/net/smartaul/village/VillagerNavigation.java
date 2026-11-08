@@ -27,6 +27,15 @@ import net.minecraft.class_2350.class_2353;
 public final class VillagerNavigation {
    private static final Map<class_1308, NavigationState> xy2bukilziav0 = new WeakHashMap<>();
    private static final Map<class_3218, Long> x1tiv6ssain9ri = new WeakHashMap<>();
+   /** Tick of the last long-route search slice per world: at most one slice per world tick. */
+   private static final Map<class_3218, Long> searchSlices = new WeakHashMap<>();
+   /** Goals at least this far (squared) are planned with a resumable search. */
+   static final double LONG_ROUTE_SQ = 2304.0;
+   static final int LONG_ROUTE_NODES = 24_000;
+   static final int SHORT_ROUTE_NODES = 6_000;
+   /** Weighted A* for long routes: about a third of the nodes for a near-optimal detour. */
+   static final int LONG_ROUTE_WEIGHT = 125;
+   static final long SEARCH_SLICE_NANOS = 3_000_000L;
 
    private VillagerNavigation() {
    }
@@ -34,11 +43,25 @@ public final class VillagerNavigation {
    public static void x26rn6haaqjid6() {
       xy2bukilziav0.clear();
       x1tiv6ssain9ri.clear();
+      searchSlices.clear();
    }
 
    public static void x3oupbjeq14mj8(class_1308 var0) {
       xy2bukilziav0.remove(var0);
       var0.method_5942().method_6340();
+   }
+
+   /**
+    * Stops walking but keeps the planned route and any search in progress, e.g. while an
+    * expedition leader waits for the group. The wait does not count as being stuck.
+    */
+   public static void pause(class_3218 world, class_1308 mob) {
+      mob.method_5942().method_6340();
+      NavigationState state = xy2bukilziav0.get(mob);
+      if (state == null) return;
+      state.x1qt4uh5iogtme = mob.method_24515();
+      state.x1etn08okxo4qh = world.method_75260();
+      state.x1h7unpbxmmlly = null;
    }
 
    public static String xs0vwkswo7jny(class_1308 var0) {
@@ -55,6 +78,8 @@ public final class VillagerNavigation {
             + (var1.x35iwfetci3lq3 < var1.x3djwzkmkmiiku.size() ? var1.x3djwzkmkmiiku.get(var1.x35iwfetci3lq3) : null)
             + " failures="
             + var1.x2n9nq6uu09ugo
+            + " search="
+            + (var1.search == null ? "-" : String.valueOf(var1.search.expanded()))
             + " navEnd="
             + (var0.method_5942().method_6345() == null ? null : var0.method_5942().method_6345().method_45())
             + " following="
@@ -85,6 +110,7 @@ public final class VillagerNavigation {
          var6.x35iwfetci3lq3 = 0;
          var6.x1h7unpbxmmlly = null;
          var6.xbrpkefumlqsh = 0L;
+         var6.search = null;
       }
 
       if (var6.x1qt4uh5iogtme == null || var6.x1qt4uh5iogtme.method_10262(var1.method_24515()) >= 4.0) {
@@ -139,16 +165,41 @@ public final class VillagerNavigation {
             var6.x35iwfetci3lq3++;
          }
 
-         if (var6.x35iwfetci3lq3 >= var6.x3djwzkmkmiiku.size() && var7 >= var6.xbrpkefumlqsh) {
-            if (var7 - x1tiv6ssain9ri.getOrDefault(var0, -4611686018427387904L) < 10L || !ColonyManager.x5ll9elqpk1a4(var0)) {
-               return false;
+         if (var6.search != null && (var6.search.start().method_10262(var1.method_24515()) > 16.0 || var7 - var6.searchTick > 200L)) {
+            var6.search = null; // Moved away from the origin or abandoned: the frontier no longer applies.
+         }
+
+         if (var6.x35iwfetci3lq3 >= var6.x3djwzkmkmiiku.size() && (var6.search != null || var7 >= var6.xbrpkefumlqsh)) {
+            boolean resumed = var6.search != null;
+            if (resumed) {
+               if (searchSlices.getOrDefault(var0, Long.MIN_VALUE) == var7 || !ColonyManager.x5ll9elqpk1a4(var0)) return false;
+            } else {
+               if (var7 - x1tiv6ssain9ri.getOrDefault(var0, -4611686018427387904L) < 10L || !ColonyManager.x5ll9elqpk1a4(var0)) {
+                  return false;
+               }
+
+               x1tiv6ssain9ri.put(var0, var7);
+               var6.xbrpkefumlqsh = var7 + 100L;
+               var6.search = x3iiafc1l36ps5(var0, var1, var6.xdxnox9g75zv6);
             }
 
-            x1tiv6ssain9ri.put(var0, var7);
-            var6.xbrpkefumlqsh = var7 + 100L;
+            boolean longRoute = var6.search.longRoute();
+            int limit = longRoute ? LONG_ROUTE_NODES : SHORT_ROUTE_NODES;
             long pathStarted = System.nanoTime();
-            var6.x3djwzkmkmiiku = x3iiafc1l36ps5(var0, var1, var6.xdxnox9g75zv6);
-            ActionTrace.event(var0, null, var1 instanceof class_1646 worker ? worker : null, var2, "navigation_search", "points=" + var6.x3djwzkmkmiiku.size() + "; us=" + (System.nanoTime() - pathStarted) / 1000);
+            searchSlices.put(var0, var7);
+            var6.searchTick = var7;
+            var6.search.advance(limit, Integer.MAX_VALUE, SEARCH_SLICE_NANOS);
+            long sliceUs = (System.nanoTime() - pathStarted) / 1000;
+            if (longRoute && !var6.search.finished(limit)) {
+               return false; // Stand still; the next tick continues the same search.
+            }
+
+            var result = longRoute ? var6.search.frontierResult(limit) : var6.search.result(limit);
+            var6.search = null;
+            var6.x3djwzkmkmiiku = result.points();
+            ActionTrace.event(var0, null, var1 instanceof class_1646 worker ? worker : null, var2, "navigation_search",
+               "points=" + result.points().size() + "; us=" + sliceUs + "; expanded=" + result.expanded() + "; reached=" + result.reached()
+                  + (resumed ? "; resumed=true" : ""));
             var6.x35iwfetci3lq3 = 0;
             var6.x1h7unpbxmmlly = null;
             if (var6.x3djwzkmkmiiku.isEmpty()) {
@@ -247,11 +298,12 @@ public final class VillagerNavigation {
       }
    }
 
-   private static List<class_2338> x3iiafc1l36ps5(class_3218 var0, class_1308 var1, class_2338 var2) {
-      return NavigationSearch.find(var1.method_24515(), var2,
+   private static NavigationSearch.Session x3iiafc1l36ps5(class_3218 var0, class_1308 var1, class_2338 var2) {
+      var start = var1.method_24515();
+      return new NavigationSearch.Session(start, var2,
          pos -> x21dbjs9wlccy4(var0, var1, pos) ? VillageSafety.edgePenalty(var0, pos) : -1,
          (from, to) -> to.method_10264() <= from.method_10264() || x1sodm3kk4gpjc(var0, var1, from.method_10084()),
-         6000, 3_000_000L).points();
+         start.method_10262(var2) >= LONG_ROUTE_SQ ? LONG_ROUTE_WEIGHT : 100);
    }
 
    static int straightWaypoint(List<class_2338> points, int index) {

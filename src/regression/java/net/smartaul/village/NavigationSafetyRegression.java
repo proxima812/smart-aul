@@ -67,9 +67,94 @@ final class NavigationSafetyRegression {
             }
             require(cost == expected, "A* weighted route matches Dijkstra seed " + seed);
          }
+         // Resumable search: any slicing gives exactly the one-shot result for the same node limit.
+         for (int limit : new int[]{3, 17, 6000}) {
+            var session = new NavigationSearch.Session(from, to, terrain, (a, b) -> true);
+            int slice = 1 + seed % 7;
+            while (!session.finished(limit)) session.advance(limit, slice, 0);
+            var sliced = session.result(limit);
+            var once = NavigationSearch.find(from, to, terrain, (a, b) -> true, limit, 0);
+            require(sliced.equals(once), "sliced search equals one-shot seed " + seed + " limit " + limit);
+         }
       }
+      longRouteTrap();
       persistenceAndTemplate();
       System.out.println("Navigation/safety/town hall regressions: PASS");
+   }
+
+   /**
+    * B-002: a concave wall facing the start. A repeated short one-shot search (the old
+    * behaviour under a 3 ms slice) walks into the pocket and stops; the resumable search
+    * with the long-route node limit plans the detour.
+    */
+   private static void longRouteTrap() {
+      var start = new class_2338(0, 64, 0);
+      var goal = new class_2338(170, 64, 0);
+      ToIntFunction<class_2338> trap = p -> {
+         int x = p.method_10263(), z = p.method_10260();
+         if (p.method_10264() != 64 || x < -20 || x > 190 || Math.abs(z) > 120) return -1;
+         boolean wall = x == 40 && Math.abs(z) <= 40 || Math.abs(z) == 40 && x >= 20 && x <= 40;
+         return wall ? -1 : 0;
+      };
+      var position = start;
+      for (int step = 0; step < 200 && position.method_10262(goal) > 2.25; step++) {
+         var partial = NavigationSearch.find(position, goal, trap, (a, b) -> true, 100, 0);
+         if (partial.points().isEmpty()) break;
+         position = partial.points().getLast();
+      }
+      require(position.method_10263() < 40 && Math.abs(position.method_10260()) < 40,
+         "trap fixture: repeated short searches stall inside the pocket, at " + position);
+      int limit = VillagerNavigation.LONG_ROUTE_NODES, weight = VillagerNavigation.LONG_ROUTE_WEIGHT;
+      var session = new NavigationSearch.Session(start, goal, trap, (a, b) -> true, weight);
+      int slices = 0;
+      while (!session.finished(limit)) { session.advance(limit, 100, 0); slices++; }
+      var route = session.result(limit);
+      require(route.reached(), "resumable search plans the detour (expanded " + route.expanded() + ")");
+      require(route.points().stream().allMatch(p -> trap.applyAsInt(p) >= 0), "detour stays on walkable cells");
+      var once = new NavigationSearch.Session(start, goal, trap, (a, b) -> true, weight);
+      once.advance(limit, Integer.MAX_VALUE, 0);
+      require(route.equals(once.result(limit)), "slicing does not change the detour");
+      int optimal = pathCost(start, NavigationSearch.find(start, goal, trap, (a, b) -> true, 60_000, 0).points());
+      require(pathCost(start, route.points()) * 100 <= optimal * weight, "weighted detour stays within the weight bound");
+
+      // Expedition targets lie beyond the ±192 search window, so the route is planned in legs.
+      // With a pocket larger than one leg, the closest-by-estimate node is the wall itself;
+      // a leg must follow the lowest-f frontier node, which already includes the detour.
+      var far = new class_2338(300, 64, 0);
+      ToIntFunction<class_2338> deep = p -> {
+         int x = p.method_10263(), z = p.method_10260();
+         if (p.method_10264() != 64 || x < -20 || x > 320 || Math.abs(z) > 150) return -1;
+         return x == 120 && Math.abs(z) <= 110 || Math.abs(z) == 110 && x >= 20 && x <= 120 ? -1 : 0;
+      };
+      var greedy = legs(start, far, deep, false);
+      require(greedy.method_10263() < 120, "deep trap fixture: closest-node legs stall at the wall, at " + greedy);
+      var legEnd = legs(start, far, deep, true);
+      require(legEnd.method_10262(far) <= 2.25, "frontier legs reach a target beyond the window, at " + legEnd);
+      System.out.println("Long-route trap: PASS (expanded " + route.expanded() + ", slices " + slices + ")");
+   }
+
+   /** Plans successive long-route legs, walking to the end of each, like a travelling leader. */
+   private static class_2338 legs(class_2338 start, class_2338 goal, ToIntFunction<class_2338> terrain, boolean frontier) {
+      int limit = VillagerNavigation.LONG_ROUTE_NODES;
+      var position = start;
+      for (int leg = 0; leg < 10 && position.method_10262(goal) > 2.25; leg++) {
+         var session = new NavigationSearch.Session(position, goal, terrain, (a, b) -> true, VillagerNavigation.LONG_ROUTE_WEIGHT);
+         while (!session.finished(limit)) session.advance(limit, 500, 0);
+         var path = frontier ? session.frontierResult(limit) : session.result(limit);
+         if (path.points().isEmpty()) break;
+         require(path.points().stream().allMatch(p -> terrain.applyAsInt(p) >= 0), "leg stays on walkable cells");
+         position = path.points().getLast();
+      }
+      return position;
+   }
+
+   private static int pathCost(class_2338 start, List<class_2338> points) {
+      int cost = 0; var prev = start;
+      for (var point : points) {
+         cost += point.method_10263() != prev.method_10263() && point.method_10260() != prev.method_10260() ? 14 : 10;
+         prev = point;
+      }
+      return cost;
    }
 
    private static int oracle(class_2338 start, class_2338 goal, ToIntFunction<class_2338> terrain) {
