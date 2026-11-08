@@ -120,6 +120,7 @@ public final class ColonyTravelTask extends class_4097<class_1646> {
                      }
 
                      if (var12.method_7960()) {
+                        if (CourierSupply.request(var1, this.x3h8nrw0jzbxhj, var2, var2.method_24515(), var10, var11, 16, 80)) return;
                         var var19 = ColonyManager.x2ytjyhq411pf7(var1, this.x3h8nrw0jzbxhj, var2.method_24515(), var11);
                         if (var19.isEmpty()) {
                            WorkDiagnostics.x1qd0mutwsr3sc(var2, "ремонт: нужны материалы");
@@ -238,6 +239,7 @@ public final class ColonyTravelTask extends class_4097<class_1646> {
    }
 
    protected void finishRunning(class_3218 var1, class_1646 var2, long var3) {
+      if(this.x3h8nrw0jzbxhj!=null) this.x3h8nrw0jzbxhj.materialRequests.cancel(var2.method_5667());
       ActionTrace.worker(var2, "task_stop", "ColonyTravelTask", false);
       if (this.x3h8nrw0jzbxhj != null
          && this.xh8i537idrcwu != null

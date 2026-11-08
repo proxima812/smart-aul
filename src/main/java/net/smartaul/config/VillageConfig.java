@@ -1,6 +1,7 @@
 package net.smartaul.config;
 
 public final class VillageConfig {
+   public int courier_min_population = 10;
    // New fields also receive these defaults when loading an older JSON config.
    public int development_speed = 3;
    public int builder_blocks_per_action = 3;

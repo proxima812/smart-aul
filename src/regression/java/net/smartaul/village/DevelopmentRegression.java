@@ -56,6 +56,7 @@ public final class DevelopmentRegression {
       LogicRegression.run();
       FuzzRegression.run();
       LeisureRegression.run();
+      CourierRegression.run();
       BlueprintRegression.run();
       persistence();
       expeditionLoss();

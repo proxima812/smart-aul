@@ -81,6 +81,7 @@ public final class TownHall {
    public static List<String> details(class_3218 world, Colony colony) {
       var lines = new ArrayList<String>();
       lines.add("Ратуша — планы поселения");
+      lines.addAll(colony.materialRequests.describe());
       lines.add(SettlementSupport.progress(colony));
       lines.add("Запасы: еда " + colony.cachedFood() + ", дерево " + colony.cachedLogs() + ", камень " + colony.cachedStone());
       lines.add("Безопасность: перекрыто " + colony.completedSafetyCovers + ", ожидает " + colony.safetyCovers.size());

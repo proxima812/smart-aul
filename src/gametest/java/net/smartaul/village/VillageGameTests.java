@@ -8,6 +8,38 @@ import net.smartaul.config.SmartAulConfig;
 /** Real ServerWorld tests; package access avoids adding test hooks to the release mod. */
 public final class VillageGameTests {
     @GameTest
+    public void courierDeliversToBuilderAfterReload(class_4516 context) {
+        var world=context.method_35943();
+        var storage=context.method_36052(new class_2338(3,2,3));
+        context.method_35946(3,2,3,class_2246.field_10034);
+        context.method_75529(world.method_8321(storage) instanceof class_1263,"Fixture must be a chest");
+        var inventory=(class_1263)world.method_8321(storage);
+        inventory.method_5447(0,new class_1799(class_1802.field_8317,64));
+        var builder=context.method_35962(class_1299.field_6077,2,2,3);
+        var courier=context.method_35962(class_1299.field_6077,2,2,2);
+        builder.method_5977(true); courier.method_5977(true);
+        var colony=new Colony(UUID.randomUUID(),storage,96,world.method_75260());
+        colony.x2ad3s8aentmo4().add(storage);
+        colony.x36xpmo21hmp9h(builder.method_5667(),ColonyRole.BUILDER);
+        colony.x36xpmo21hmp9h(courier.method_5667(),ColonyRole.COURIER);
+        var r=colony.materialRequests.submit(builder.method_5667(),class_7923.field_41178.method_10221(class_1802.field_8317),16,
+            builder.method_24515(),80,world.method_75260());
+        CourierSupply.step(world,colony,courier,world.method_75260());
+        context.method_75529(r.cargo==16 && inventory.method_5438(0).method_7947()==48,"Withdrawal moves exactly sixteen into persistent cargo");
+        // Reload the actual colony schema while cargo is in transit: leases must not survive.
+        colony=Colony.x3bvvkrzdde479(colony.xufzblerzrsnk());
+        var replacement=context.method_35962(class_1299.field_6077,3,2,2); replacement.method_5977(true);
+        colony.x36xpmo21hmp9h(replacement.method_5667(),ColonyRole.COURIER);
+        CourierSupply.step(world,colony,replacement,world.method_75260()+1);
+        var reloaded=colony.materialRequests.entries().getFirst();
+        context.method_75529(reloaded.state==MaterialRequests.State.DELIVERED && reloaded.cargo==0,"Replacement delivers the reloaded cargo");
+        int delivered=InventoryMaterials.x2l7fon36lgwu2(builder.method_35199()).values().stream().mapToInt(Integer::intValue).sum();
+        context.method_75529(delivered==16 && inventory.method_5438(0).method_7947()==48,"No loss or duplicate withdrawal after reload");
+        CourierSupply.step(world,colony,replacement,world.method_75260()+2);
+        context.method_75529(inventory.method_5438(0).method_7947()==48,"Completed request cannot withdraw twice");
+        context.method_36036();
+    }
+    @GameTest
     public void deepHoleQueuesExactlyOneCover(class_4516 context) {
         checkHole(context, true);
     }

@@ -35,6 +35,7 @@ import net.minecraft.class_9334;
 import net.smartaul.api.VillageCapability;
 
 public final class Colony implements VillageCapability {
+   public final MaterialRequests materialRequests = new MaterialRequests();
    final Set<class_2338> safetyCovers = new LinkedHashSet<>();
    long completedSafetyCovers;
 
@@ -1157,6 +1158,7 @@ public final class Colony implements VillageCapability {
       class_2499 var11 = new class_2499();
       this.x39imgpk2g3vot.forEach(var1x -> var11.add(var1x.xklnhlce5e8jn()));
       var1.method_10566("construction_jobs", var11);
+      var1.method_10566("material_requests", materialRequests.write());
       return var1;
    }
 
@@ -1167,6 +1169,7 @@ public final class Colony implements VillageCapability {
          Math.max(96, var0.method_68083("radius", 96)),
          var0.method_68080("last_threat_tick", Long.MIN_VALUE)
       );
+      var1.materialRequests.read(var0.method_68569("material_requests"));
       class_2499 var2 = var0.method_68569("roles");
       var1.x3buthex9xdlv1 = Math.max(-1, var0.method_68083("building_search_cursor", -1));
       var1.xvm33ru31nhuk = var0.method_68080("simulated_until", Long.MIN_VALUE);

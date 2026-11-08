@@ -24,5 +24,6 @@
   "item.smart_colonies.land_notice": "Предписание старейшины: земельный участок",
   "item.smart_colonies.land_notice.price": "Для строительства купите у старейшины участок. Текущая цена: %s изумрудов.",
   "item.smart_colonies.land_notice.warning": "Остановите строительство и приобретите участок. Если через 30 секунд вы продолжите строить без разрешения, деревня нападёт.",
+  "entity.smart_colonies.role.courier": "Курьер",
   "mod.smart_aul.name": "Smart Aul"
 }

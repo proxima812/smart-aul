@@ -24,5 +24,6 @@
   "item.smart_colonies.land_notice": "Elder's land notice",
   "item.smart_colonies.land_notice.price": "Purchase land before building. Current price: %s emeralds.",
   "item.smart_colonies.land_notice.warning": "Stop building and acquire land. If you keep building without permission after 30 seconds, the village will attack.",
+  "entity.smart_colonies.role.courier": "Courier",
   "mod.smart_aul.name": "Smart Aul"
 }
