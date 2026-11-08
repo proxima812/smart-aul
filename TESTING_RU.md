@@ -354,3 +354,14 @@ NBT-совместимости и чтения шаблона ратуши са�
 `longRouteTrap` проверяет то же без мира, а также маршрут к цели за окном поиска
 ±192 блока по этапам. Отчёт: [long-route-gametest.md](docs/validation/long-route-gametest.md).
 Не покрыто: полная экспедиция с группой, ожидание отстающих, настоящий рельеф.
+
+## T-015: упакованный JAR на чистом сервере (R-002)
+
+После `gradlew.bat build`: `python tools/dev/jar_smoke.py --accept-eula --java <JDK 21>`.
+Флаг `--accept-eula` передавайте, только если Minecraft EULA принята: скрипт пишет
+`eula=true` лишь в одноразовый `build/jar-smoke/server` (каталоги `run/` запрещены).
+Скрипт скачивает Fabric server launcher и Fabric API (версии сверяет с `build.gradle`),
+кладёт в `mods/` только их и релизный JAR, делает два запуска плоского мира: жители
+под `forceload`, ~300 тиков, команды `smart_aul`, сохранение и повторная загрузка.
+Код 0 — PASS; лог `build/jar-smoke/smoke.log`, `--report` пишет JSON. Без игрока
+клиентская часть не проверяется. Отчёт: [jar-smoke.md](docs/validation/jar-smoke.md).
