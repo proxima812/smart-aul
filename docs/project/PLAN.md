@@ -20,7 +20,7 @@
 | T-010 | Серверные тесты стройки, NBT, офлайн-развития и бюджетов поиска | готово (в `main` с `d1e0323`) | Codex test sub-agent | `t3/e8a70b46` | R-006, R-005 |
 | T-009 | R-024/R-025: клиентский GameTest чертежа и таверны, скриншоты | готово (в `main` с `d1e0323`) | Codex test sub-agent | `t3/dadae87e` | T-005, T-006, R-024, R-025, B-008, D-006 |
 | T-012 | Слияние второй волны T-009…T-011, сведение ID, полная проверка | готово (в `main` с `d1e0323`) | Claude Opus 5.5 | `integration/wave2` | T-009, T-010, T-011, B-008, B-009, D-006 |
-| T-013 | R-004: серверный GameTest (`runGameTest`) в CI, отчёт JUnit XML как артефакт | ревью (локально PASS; на GitHub не запускался) | Claude Opus 5.5 | `main` | R-004, T-001, T-002 |
+| T-013 | R-004: серверный GameTest (`runGameTest`) в CI, отчёт JUnit XML как артефакт | готово (CI PASS по `ef03fc2`) | Claude Opus 5.5 | `main` | R-004, T-001, T-002 |
 | T-014 | B-002: экспедиция не доходит до цели по сложному рельефу — воспроизвести GameTest, исправить | ревью (GameTest PASS; полная экспедиция в игре не проверена) | Claude Opus 5.5 | `main` | B-002, B-010, D-007 |
 | T-015 | R-002: smoke-тест упакованного JAR на чистом Fabric-сервере | готово (PASS локально; в CI не включён) | Claude Opus 5.5 | `main` | R-002 |
 | T-016 | R-001: нагрузочный тест, порог MSPT | todo | Claude Opus 5.5 | — | R-001 |
@@ -33,6 +33,11 @@
 - Ограничения (что не проверено в игре) записаны в журнал ниже.
 
 ## Журнал готовых шагов
+
+- **2026-11-09 · T-013** — первый прогон CI с GameTest по `ef03fc2`:
+  https://github.com/proxima812/smart-aul/actions/runs/42519034599 — success за 1 мин
+  21 с; шаги «Run server GameTest» и «Upload GameTest report» — success, артефакты
+  `smart-aul-jar` и `gametest-report` выгружены.
 
 - **2026-11-09 · T-015** — `tools/dev/jar_smoke.py`: чистый выделенный Fabric-сервер
   в `build/jar-smoke` (launcher, Fabric API с Maven, релизный JAR), два запуска плоского
