@@ -71,20 +71,20 @@ public final class DevelopmentCommands {
       reply(source, "Переселение: " + (readiness.isEmpty() ? "запасы готовы; нужны пять свободных взрослых и подходящий загруженный участок." : readiness), 1);
       if (colony.x2a380ray4md5t().isPresent()) {
          long elapsed = source.method_9225().method_75260() - colony.x1spmho2xy9muc();
-         reply(source, "??????????: " + (colony.xfx95ux1xn73w() ? "???????" : elapsed < 0 ? "????" : "?????")
-            + "; ??????? " + colony.x13ua0ftegttnr() + "/24; ?? ?????? ?? ??????? "
-            + Math.max(0, SmartAulConfig.x2by5f9ehxvwk9().village.settlement_timeout_ticks - elapsed) / 20 + " ?.", 1);
+         reply(source, "Экспедиция: " + (colony.xfx95ux1xn73w() ? "возврат" : elapsed < 0 ? "сбор" : "поход")
+            + "; капитал " + colony.x13ua0ftegttnr() + "/24; до отмены по времени "
+            + Math.max(0, SmartAulConfig.x2by5f9ehxvwk9().village.settlement_timeout_ticks - elapsed) / 20 + " с.", 1);
          var people = new java.util.LinkedHashSet<>(colony.x2zftltl6vhwwx());
          people.add(colony.x2a380ray4md5t().orElseThrow());
          for (var id : people) {
             var entity = source.method_9225().method_66347(id);
             reply(source, id + ": " + (entity instanceof net.minecraft.class_1646 villager
                ? villager.method_24515().method_23854() + "; " + VillagerNavigation.xs0vwkswo7jny(villager)
-               : "?? ???????? ??? ???????????; ?????? ?? ????????????"), 1);
+               : "не загружен или отсутствует; гибель не подтверждена"), 1);
          }
       }
       if (SmartAulConfig.x2by5f9ehxvwk9().village.automatic_settlement_requires_city && !SettlementSupport.isCity(colony))
-         reply(source, "?????????????? ??????????? ??????? ??????? ??????.", 1);
+         reply(source, "Автоматическое переселение требует статуса города.", 1);
       for (var job : colony.x1ja61emeln2hc()) {
          if (job.x32oz43hmeynhc() != ConstructionStatus.COMPLETE)
             reply(source, "Дом " + job.x3ij6gescvakv2().method_23854() + ": " + job.x32oz43hmeynhc()

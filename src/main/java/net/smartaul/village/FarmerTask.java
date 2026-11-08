@@ -378,6 +378,9 @@ public final class FarmerTask extends class_4097<class_1646> {
             for (int var10 = Math.max(var1.method_31607(), var9 - 3); var10 <= var9 + 2; var10++) {
                class_2338 var11 = new class_2338(var7, var10, var8);
                class_2680 var12 = var1.method_8320(var11);
+               // B-011: open soil and grass match the filter below in almost every column, and each
+               // match ran the site validator. Skip them before it unless some branch can use them.
+               if (!this.soilUseful(var1, var2, var11, var12, var4)) continue;
                if ((
                      var12.method_26204() instanceof class_2302
                         || var12.method_27852(class_2246.field_10362)
@@ -390,7 +393,7 @@ public final class FarmerTask extends class_4097<class_1646> {
                         || x2c1mm5rnqniq6(var12) && x2csm4l72r60h(var1, var11)
                   )
                   && !this.x2t4nzijeau7w8.x2a24huns14rw4(var11, 3)
-                  && BuildingSiteValidator.x14gj5yhqspcfw(var1, this.x2t4nzijeau7w8, var11)
+                  && this.scanSiteValid(var1, var11)
                   && !ColonyWorldData.get(var1).isPlayerBlock(var11)
                   && var1.method_8321(var11) == null) {
                   if (var12.method_27852(class_2246.field_10362)) {
@@ -445,6 +448,55 @@ public final class FarmerTask extends class_4097<class_1646> {
       }
 
       return true;
+   }
+
+   /**
+    * Cheap pre-filter for the search scan, equivalent to the candidate branches: dirt or grass
+    * with open space above is only used with seeds, next to farmland (replanting) or on a planned
+    * or village field; short grass and fern only as a seed source while the farmer has no seeds.
+    * Water is only a bucket-filling candidate while none is chosen and the farmer carries an
+    * empty bucket. Other block types (crops, farmland, hay) are not affected.
+    */
+   private boolean soilUseful(class_3218 world, class_1646 villager, class_2338 pos, class_2680 state, int seeds) {
+      if (x2c1mm5rnqniq6(state)) {
+         return seeds > 0 && x2csm4l72r60h(world, pos)
+            && (x3unncyqyb7c08(world, pos) || this.x2t4nzijeau7w8.x1hdthtpd2qb8g().contains(pos) || VillageRepair.x1e11i1kd8301v(world, pos));
+      }
+      if (state.method_27852(class_2246.field_10479) || state.method_27852(class_2246.field_10214)) {
+         return seeds == 0 && this.xubfe0kx0uwh0 == null;
+      }
+      if (state.method_27852(class_2246.field_10382)) {
+         return this.x3abk5220xo1ii == null && x23na3hzbpcw6h(villager, class_1802.field_8550) && x3g51t72kitfhf(world, pos);
+      }
+      return true;
+   }
+
+   /**
+    * Scan-only cache of the site validator (B-011). It only affects target choice for up to
+    * SITE_CACHE_TICKS: planned buildings are re-checked on arrival, and every block change still
+    * goes through WorldEditPolicy (land claims, mobGriefing).
+    */
+   private final it.unimi.dsi.fastutil.longs.Long2LongOpenHashMap siteCache = new it.unimi.dsi.fastutil.longs.Long2LongOpenHashMap();
+   private Colony siteCacheColony;
+   static final long SITE_CACHE_TICKS = 200L;
+   static final int SITE_CACHE_LIMIT = 16_384;
+
+   private boolean scanSiteValid(class_3218 world, class_2338 pos) {
+      long now = world.method_75260();
+      if (this.siteCacheColony != this.x2t4nzijeau7w8) {
+         this.siteCache.clear();
+         this.siteCacheColony = this.x2t4nzijeau7w8;
+      }
+      long key = pos.method_10063();
+      long cached = this.siteCache.getOrDefault(key, -1L);
+      if (cached >= 0 && (cached >>> 1) > now) return (cached & 1L) != 0;
+      boolean valid = BuildingSiteValidator.x14gj5yhqspcfw(world, this.x2t4nzijeau7w8, pos);
+      if (this.siteCache.size() >= SITE_CACHE_LIMIT) {
+         this.siteCache.long2LongEntrySet().removeIf(e -> (e.getLongValue() >>> 1) <= now);
+         if (this.siteCache.size() >= SITE_CACHE_LIMIT) this.siteCache.clear();
+      }
+      this.siteCache.put(key, ((now + SITE_CACHE_TICKS) << 1) | (valid ? 1L : 0L));
+      return valid;
    }
 
    private static class_2338 x2xg33b8fprhix(class_1646 var0, class_2338 var1, class_2338 var2) {

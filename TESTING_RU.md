@@ -365,3 +365,12 @@ NBT-совместимости и чтения шаблона ратуши са�
 под `forceload`, ~300 тиков, команды `smart_aul`, сохранение и повторная загрузка.
 Код 0 — PASS; лог `build/jar-smoke/smoke.log`, `--report` пишет JSON. Без игрока
 клиентская часть не проверяется. Отчёт: [jar-smoke.md](docs/validation/jar-smoke.md).
+
+## T-016: нагрузка 5 деревень / 140 жителей (R-001)
+
+После `gradlew.bat build` и одного запуска `tools/dev/jar_smoke.py` (кэш launcher и Fabric API):
+`python tools/dev/load_test.py --accept-eula --java <JDK 21>`. Два прогона на одном сиде —
+со Smart Aul и без него; деревни находятся `locate`, грузятся `forceload`, дополняются жителями;
+замер — `/tick query` 3 минуты после прогрева. Порог — D-008, отчёт `build/load-test/report.json`,
+лог `build/load-test/load.log`. Профиль: `--jvm-arg=-XX:StartFlightRecording=delay=200s,duration=100s,settings=profile,filename=...`.
+Около 15 минут. Последние результаты: [load-test.md](docs/validation/load-test.md).
