@@ -1,0 +1,9 @@
+[11:19:20] [main/INFO]: [STDOUT]: Navigation/safety/town hall regressions: PASS
+[11:19:20] [main/INFO]: [STDOUT]: Logic regressions: PASS (935 checks)
+Fuzz regression: PASS (3000 maps / 9750 searches / 1454 reachable, 1000 NBT cases, 64 JSON cases; 1.656s; base seed=6002525700211430732)
+[11:19:21] [main/INFO]: [STDOUT]: Tavern/leisure regressions: PASS
+[11:19:21] [main/INFO]: [STDOUT]: Blueprint regressions: PASS
+[11:19:21] [main/INFO]: [STDOUT]: Development regression: PASS (96994 checks)
+> Task :runGameTest
+[11:19:33] [Server thread/INFO] (Minecraft) All 4 required tests passed :)
+BUILD SUCCESSFUL in 25s

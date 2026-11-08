@@ -42,6 +42,16 @@
 Старый NBT без `material_requests` даёт пустую очередь. Код, схемы и тексты
 MineColonies не использовались (D-001). Клиентский рендер, сеть и таверна не менялись.
 
+## D-006 · Client GameTest ждёт состояние явно (2026-11-08)
+
+В T-009 один запуск упал с `Network synchronizer in invalid state` (B-008).
+В `loom.runs.clientGameTest` включён рекомендованный сообщением Fabric флаг
+`fabric.client.gametest.disableNetworkSynchronizer`; серверный run не меняется.
+Поэтому тест обязан явно ждать не только mesh после S2C, но и установленные
+блоки на клиенте перед `waitForChunksRender` и скриншотами. Нельзя считать
+завершение server.runOnServer подтверждением получения блоков клиентом.
+При обновлении Fabric повторно проверить необходимость обхода.
+
 ## D-004 · Обходной Mixin для GameTest с локальными mappings (2026-11-08)
 
 Локальные identity mappings оставляют у enum Minecraft имена Mojang, а Loom

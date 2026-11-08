@@ -3,9 +3,10 @@
   "id": "smart_aul_gametest",
   "version": "1.0.0",
   "name": "Smart Aul server integration tests",
-  "environment": "server",
+  "environment": "*",
   "mixins": ["smart_aul_gametest.mixins.json"],
   "entrypoints": {
+    "fabric-client-gametest": ["net.smartaul.village.VisualGameTests"],
     "fabric-gametest": ["net.smartaul.village.VillageGameTests", "net.smartaul.village.ConstructionGameTests", "net.smartaul.village.OfflineBudgetGameTests"]
   },
   "depends": {
