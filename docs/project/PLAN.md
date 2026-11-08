@@ -7,18 +7,19 @@
 
 | ID | Задача | Статус | Исполнитель | Ветка / место | Связи |
 |---|---|---|---|---|---|
-| T-001 | CI на GitHub Actions: `build` на JDK 21, `git diff --check` для PR, JAR как артефакт | ревью (не запускался на GitHub) | Claude Opus 5.5 | `integration/tests-buildings-leisure` @ `1b7608b` | B-001, R-004 |
-| T-002 | Fabric GameTest: отдельный source set, headless-запуск, 3–5 тестов в реальном мире | ревью (слито в integration, ждёт `main`) | GPT-6.1 Sol (high) | `t3/808ed80a` @ `3b05573` | D-004, R-004, R-006 |
-| T-003 | Регрессии непокрытой логики: участки, резервирования, бюджет поиска, офлайн-развитие, экономика, торговля, рецепты | ревью (слито в integration, ждёт `main`) | GPT-6.1 Sol (high) | `t3/4dbdc8cc` @ `6a996df` | R-005 |
-| T-004 | Fuzz/property-тесты: A* против Дейкстры на тысячах карт, битые NBT и конфиги | ревью (слито в integration, ждёт `main`) | GPT-6.1 Sol (high) | `t3/7a5a01f9` @ `a814a54` | B-003…B-006, B-002 |
-| T-005 | Голограмма-схема построек (белые полупрозрачные блоки), `/smart_aul blueprint`, `/smart_aul plan` | ревью (визуально не проверено) | GPT-6.1 Sol (high) | `t3/ecf997a5` @ `a3efd5a` | D-002, R-025, R-026 |
-| T-006 | Таверна и места отдыха, поведение отдыха вечером, опционально настроение | ревью (слито в integration, ждёт `main`) | GPT-6.1 Sol (high) | `t3/3ac7392a` @ `0ad2dc0` | D-001, R-012, R-022, R-023 |
-| T-007 | Слияние веток T-002…T-006: свести строки в `DevelopmentRegression.main`, `fabric.mod.json`, `SmartAulMod`; полный `build` | готово (в `main` не слито) | Claude Opus 5.5 | `integration/tests-buildings-leisure` @ `e829ac9` | T-001…T-006 |
+| T-001 | CI на GitHub Actions: `build` на JDK 21, `git diff --check` для PR, JAR как артефакт | готово (CI на GitHub PASS по `cd3a28f`) | Claude Opus 5.5 | `main` | B-001, R-004 |
+| T-002 | Fabric GameTest: отдельный source set, headless-запуск, 3–5 тестов в реальном мире | готово (в `main` с `cd3a28f`) | GPT-6.1 Sol (high) | `t3/808ed80a` @ `3b05573` | D-004, R-004, R-006 |
+| T-003 | Регрессии непокрытой логики: участки, резервирования, бюджет поиска, офлайн-развитие, экономика, торговля, рецепты | готово (в `main` с `cd3a28f`) | GPT-6.1 Sol (high) | `t3/4dbdc8cc` @ `6a996df` | R-005 |
+| T-004 | Fuzz/property-тесты: A* против Дейкстры на тысячах карт, битые NBT и конфиги | готово (в `main` с `cd3a28f`) | GPT-6.1 Sol (high) | `t3/7a5a01f9` @ `a814a54` | B-003…B-006, B-002 |
+| T-005 | Голограмма-схема построек (белые полупрозрачные блоки), `/smart_aul blueprint`, `/smart_aul plan` | готово (в `main`; визуально подтверждено T-009) | GPT-6.1 Sol (high) | `t3/ecf997a5` @ `a3efd5a` | D-002, R-025, R-026 |
+| T-006 | Таверна и места отдыха, поведение отдыха вечером, опционально настроение | готово (в `main` с `cd3a28f`) | GPT-6.1 Sol (high) | `t3/3ac7392a` @ `0ad2dc0` | D-001, R-012, R-022, R-023 |
+| T-007 | Слияние веток T-002…T-006: свести строки в `DevelopmentRegression.main`, `fabric.mod.json`, `SmartAulMod`; полный `build` | готово (в `main` с `cd3a28f`) | Claude Opus 5.5 | `integration/tests-buildings-leisure` @ `e829ac9` | T-001…T-006 |
 | T-008 | Структура учёта прогресса `docs/project` и правила в `AGENTS.md` | готово | Claude Opus 5.5 | `integration/tests-buildings-leisure` @ `1b7608b` | — |
-| T-011 | Склад с курьером и заявки материалов | ревью (живой AI не проверен) | Codex | `t3/c06fdda4` | R-010, B-007, D-005 |
-| T-010 | Серверные тесты стройки, NBT, офлайн-развития и бюджетов поиска | ревью (11/11 PASS) | Codex test sub-agent | `t3/e8a70b46` | R-006, R-005 |
+| T-011 | Склад с курьером и заявки материалов | ревью (слито в `integration/wave2`; живой AI не проверен) | Codex | `t3/c06fdda4` | R-010, B-007, D-005 |
+| T-010 | Серверные тесты стройки, NBT, офлайн-развития и бюджетов поиска | ревью (слито в `integration/wave2`) | Codex test sub-agent | `t3/e8a70b46` | R-006, R-005 |
 
-| T-009 | R-024/R-025: клиентский GameTest чертежа и таверны, скриншоты | готово (в своей ветке) | Codex test sub-agent | `t3/dadae87e` | T-005, T-006, R-024, R-025, B-008, D-006 |
+| T-009 | R-024/R-025: клиентский GameTest чертежа и таверны, скриншоты | ревью (слито в `integration/wave2`) | Codex test sub-agent | `t3/dadae87e` | T-005, T-006, R-024, R-025, B-008, D-006 |
+| T-012 | Слияние второй волны T-009…T-011, сведение ID, полная проверка | готово (ждёт `main`) | Claude Opus 5.5 | `integration/wave2` | T-009, T-010, T-011, B-008, B-009, D-006 |
 
 ## Критерии готовности задачи
 
@@ -54,6 +55,23 @@
   Итоговая проверка и таверна ещё в работе.
 
 Новые записи — сверху. Формат: дата, ID, что сделано, проверка, коммит/ветка, ограничения.
+
+- **2026-11-08 · T-012** — ветка `integration/wave2` от `main` (`cd3a28f`): слияния
+  T-011 (`t3/c06fdda4`), T-010 (`t3/e8a70b46`), T-009 (`t3/dadae87e`). Конфликты:
+  записи `PLAN.md` (оставлены обе стороны), entrypoints в
+  `src/gametest/resources/fabric.mod.json` (клиентский тест + все три серверных
+  класса), `TESTING_RU.md`, `BUGS.md`, `DECISIONS.md`. **Коллизия ID:** T-011 и
+  T-009 обе заняли B-007 и D-005; за T-011 оставлены B-007/D-005, у T-009
+  переименованы в B-008/D-006 (BUGS, DECISIONS, TESTING_RU, PLAN, visual-check.md).
+  Проверка координатора: `gradlew.bat clean build runGameTest` — BUILD SUCCESSFUL;
+  навигация, Logic 935, Fuzz, таверна, курьер, чертежи, Development 96 994 — PASS;
+  серверный GameTest 12/12 PASS; `runClientGameTest` — BUILD SUCCESSFUL
+  (перезаписанные тестом PNG возвращены к закоммиченным). Координатор сам
+  просмотрел скриншоты: голограмма белая полупрозрачная с контуром, при `off`
+  исчезает; в таверне посетители стоят кучкой в проходе → B-009.
+- **2026-11-08 · T-001** — первый прогон CI на GitHub по `cd3a28f`:
+  https://github.com/proxima812/smart-aul/actions/runs/42453280728 — success за
+  2 мин 8 с (сборка, регрессии, выгрузка JAR; `git diff --check` пропущен — только для PR).
 
 - **2026-11-08 · T-011** — очередь материалов (128 записей, дедупликация,
   приоритет/срок/состояния, lease `TimedReservation`), роль `COURIER` в конце
