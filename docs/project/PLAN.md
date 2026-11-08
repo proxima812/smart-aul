@@ -15,6 +15,7 @@
 | T-006 | Таверна и места отдыха, поведение отдыха вечером, опционально настроение | ревью (слито в integration, ждёт `main`) | GPT-6.1 Sol (high) | `t3/3ac7392a` @ `0ad2dc0` | D-001, R-012, R-022, R-023 |
 | T-007 | Слияние веток T-002…T-006: свести строки в `DevelopmentRegression.main`, `fabric.mod.json`, `SmartAulMod`; полный `build` | готово (в `main` не слито) | Claude Opus 5.5 | `integration/tests-buildings-leisure` @ `e829ac9` | T-001…T-006 |
 | T-008 | Структура учёта прогресса `docs/project` и правила в `AGENTS.md` | готово | Claude Opus 5.5 | `integration/tests-buildings-leisure` @ `1b7608b` | — |
+| T-010 | Серверные тесты стройки, NBT, офлайн-развития и бюджетов поиска | ревью (11/11 PASS) | Codex test sub-agent | `t3/e8a70b46` | R-006, R-005 |
 
 ## Критерии готовности задачи
 
@@ -26,6 +27,10 @@
 ## Журнал готовых шагов
 
 Новые записи — сверху. Формат: дата, ID, что сделано, проверка, коммит/ветка, ограничения.
+
+- **2026-11-08 · T-010** — семь новых серверных GameTest: реальная стройка до COMPLETE, точное списание каждого блока, ожидание доставки, бинарный NBT ColonyWorldData с продолжением без дублей; офлайн 1/6/30 дней, конверсия склада, квота SearchBudget и лимиты узлов/времени NavigationSearch. Итоговый `gradlew.bat build runGameTest` — PASS, 11/11 GameTest; Development 96 994, Logic 935, fuzz PASS. `git diff --check` — PASS. Ветка `t3/e8a70b46`; src/main и build.gradle не менялись, новых подтверждённых багов нет. Отчёт `docs/validation/construction-offline-gametest.md`, рядом XML. Ограничения: NBT в памяти без перезапуска JVM, короткий путь/малый шаблон, без клиентской проверки.
+
+- **2026-11-08 · T-010** — первый `build runGameTest`: build и регрессии PASS, GameTest 7/10; три строительных теста выявили ошибки стенда (не отмечен созданный склад; пустота ниже фундамента). Стенд исправлен, проверки расхода не ослаблены; повторная проверка в работе. Ветка `t3/e8a70b46`, src/main не менялся.
 
 - **2026-11-08 · T-007** — ветка `integration/tests-buildings-leisure` от `c21737d`:
   коммит CI и учёта `1b7608b`, затем слияния T-003, T-002, T-004, T-006, T-005
