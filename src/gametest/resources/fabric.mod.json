@@ -6,7 +6,7 @@
   "environment": "server",
   "mixins": ["smart_aul_gametest.mixins.json"],
   "entrypoints": {
-    "fabric-gametest": ["net.smartaul.village.VillageGameTests"]
+    "fabric-gametest": ["net.smartaul.village.VillageGameTests", "net.smartaul.village.ConstructionGameTests", "net.smartaul.village.OfflineBudgetGameTests"]
   },
   "depends": {
     "smart_aul": "*",
