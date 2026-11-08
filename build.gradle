@@ -60,7 +60,7 @@ fabricApi {
         createSourceSet = true
         modId = "smart_aul_gametest"
         enableGameTests = true
-        enableClientGameTests = false
+        enableClientGameTests = true
     }
 }
 loom.runs.gameTest {
@@ -71,4 +71,13 @@ loom.runs.gameTest {
 }
 tasks.named('runGameTest') {
     doFirst { layout.buildDirectory.dir('reports/gametest').get().asFile.mkdirs() }
+}
+
+// Client GameTest creates disposable singleplayer worlds only under this directory.
+loom.runs.clientGameTest {
+    runDir 'build/client-gametest'
+    // Fabric's strict packet accounting intermittently rejects custom payload scheduling.
+    // The test explicitly waits for the client mesh and chunk rendering instead.
+    vmArg '-Dfabric.client.gametest.disableNetworkSynchronizer'
+    vmArg "-Dsmart_aul.visual-output=${projectDir}/docs/validation"
 }
