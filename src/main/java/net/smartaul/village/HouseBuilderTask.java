@@ -281,6 +281,7 @@ public final class HouseBuilderTask extends class_4097<class_1646> {
    }
 
    protected void finishRunning(class_3218 var1, class_1646 var2, long var3) {
+      if(this.x80pqmx58uqey!=null) this.x80pqmx58uqey.materialRequests.cancel(var2.method_5667());
       ActionTrace.worker(var2, "task_stop", "HouseBuilderTask", false);
       this.x28a0hyz23oia6.xupxzzyodxtwj(var1, var2);
       var2.method_5942().method_6340();
@@ -496,6 +497,10 @@ public final class HouseBuilderTask extends class_4097<class_1646> {
       int var8 = ColonyManager.x1mlne8tl8k5ag(var1, this.x80pqmx58uqey, var0 -> var0.method_31573(class_3489.field_25808));
       Predicate<class_1799> var9 = materialPredicate(var3.x2hmkda3gwcacx(), var6)
          .and(var2x -> var2x.method_31573(class_3489.field_15539) ? var7 > 8 : (var2x.method_31573(class_3489.field_25808) ? var8 > 8 : true));
+      if (CourierSupply.request(var1, this.x80pqmx58uqey, var2, var2.method_24515(), var6, var9, 32, 50)) {
+         this.xb9ohdv6bza8d = var4 + 40L;
+         return;
+      }
       var var10 = ColonyManager.x1dhbpietunk9i(var1, this.x80pqmx58uqey, var2, var9);
       boolean var11 = false;
       if (var10.isEmpty()) {

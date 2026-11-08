@@ -128,6 +128,10 @@ public final class ColonyManager {
 
                   if (Math.floorMod(var2 + var8.core().method_10063(), 20) == 0) VillageSafety.observe(var0, var8);
                   TownHall.tick(var0, var8);
+                  if (var2 % 20 == 0 && !var8.materialRequests.entries().isEmpty()) {
+                     var8.materialRequests.expire(var2);
+                     var1.method_80();
+                  }
                   ConstructionManager.x3ij59k18pnfmd(var0, var8);
                   if (var8.x3p06s7riestqm() <= 0L || !SmartAulConfig.x2by5f9ehxvwk9().village.offline_development || !WorldEditPolicy.x35ev8l9vc9uk7(var0)) {
                      if (!CreativeCityMode.contains(var0, var8)) var5 -= ConstructionManager.x12vivbc3rlygx(var0, var8, var5);
@@ -1343,6 +1347,7 @@ public final class ColonyManager {
             ColonyRole.MINER,
             ColonyRole.FISHERMAN,
             ColonyRole.RANCHER,
+            ColonyRole.COURIER,
             ColonyRole.GUARD
          )
       );
@@ -1543,7 +1548,10 @@ public final class ColonyManager {
             .stream()
             .filter(var1x -> (Integer)var4.get(var1x) > 0)
             .toList();
-         var minimumRoles = DevelopmentPolicy.minimumRoles(var3, var17);
+         var minimumRoles = new ArrayList<>(DevelopmentPolicy.minimumRoles(var3, var17));
+         boolean courier = !var0.x2ad3s8aentmo4().isEmpty()
+            && var0.population() >= SmartAulConfig.x2by5f9ehxvwk9().village.courier_min_population && var3 >= 8;
+         if (courier) { minimumRoles.add(ColonyRole.COURIER); }
          for (ColonyRole var21 : minimumRoles) {
             var5.put(var21, 1);
          }

@@ -7,6 +7,7 @@ public final class DevelopmentPolicy {
    private DevelopmentPolicy() {}
 
    public static void validate(VillageConfig c) {
+      c.courier_min_population = Math.clamp(c.courier_min_population, 8, Math.max(8, c.max_population_per_bell));
       c.tavern_min_population = Math.clamp(c.tavern_min_population, 2, Math.max(2, c.max_population_per_bell));
       c.development_speed = Math.clamp(c.development_speed, 1, 8);
       c.builder_blocks_per_action = Math.clamp(c.builder_blocks_per_action, 1, 8);

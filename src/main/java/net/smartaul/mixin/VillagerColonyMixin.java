@@ -450,6 +450,7 @@ public abstract class VillagerColonyMixin {
          ColonyActivities.x12qpuae7zsr5m,
          ImmutableList.of(
             Pair.of(0, new RepairTask()),
+            Pair.of(0, new net.smartaul.village.CourierTask()),
             Pair.of(0, new ColonyTravelTask()),
             Pair.of(0, new RoadBuilderTask()),
             Pair.of(1, new HouseBuilderTask()),

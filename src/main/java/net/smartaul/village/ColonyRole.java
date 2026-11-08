@@ -12,7 +12,8 @@ public enum ColonyRole {
    RANCHER,
    ELDER,
    FOUNDER,
-   CITIZEN;
+   CITIZEN,
+   COURIER;
 
    // Preserve the original obfuscated binary field names.
    public static final ColonyRole x35csp4lojh59r = BUILDER;
