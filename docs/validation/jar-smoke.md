@@ -1,7 +1,7 @@
 # Smoke-тест упакованного JAR (R-002, T-015) — 2026-11-09
 
 Ревизия: `main` @ `ef03fc2`; JAR `build/libs/smart-aul-1.1.0-dev.jar` из `gradlew.bat build`.
-Команда: `python tools/dev/jar_smoke.py --accept-eula --java "C:\Program Files\Java\jdk-21in\java.exe"`.
+Команда: `python tools/dev/jar_smoke.py --accept-eula --java "C:\Program Files\Java\jdk-21\bin\java.exe"`.
 Windows 11, JDK 21. EULA принята пользователем для одноразового каталога `build/jar-smoke`.
 
 ## Стенд
