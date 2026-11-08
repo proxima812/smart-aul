@@ -34,6 +34,19 @@ jobs:
           chmod +x ./gradlew
           ./gradlew build --console=plain --stacktrace
 
+      # Headless server GameTest (Fabric) in a disposable world under build/gametest.
+      # Client GameTest needs OpenGL and stays a local check (TESTING_RU.md).
+      - name: Run server GameTest
+        run: ./gradlew runGameTest --console=plain --stacktrace
+
+      - name: Upload GameTest report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gametest-report
+          path: build/reports/gametest/
+          if-no-files-found: warn
+
       - name: Check whitespace
         if: github.event_name == 'pull_request'
         run: git diff --check origin/${{ github.base_ref }}...HEAD
